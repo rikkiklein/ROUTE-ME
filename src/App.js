@@ -6,7 +6,7 @@ class App extends Component {
 
   getDistance(){
     utils.getDistanceMatrix().then((res) => {
-      console.log(res);
+      console.log(res.data);
   })
 }
 
