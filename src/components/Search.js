@@ -23,7 +23,6 @@ class Search extends Component {
       midLocations.push(this.refs[prop].state.location);
     }
 
-
     console.log("start is", start, "end is", end);
     console.log("mid locations are: ", midLocations);
     let data = {
@@ -71,16 +70,27 @@ addMidLocation(){
   this.setState({mid_locations: updatedLocations});
 }
 
+removeMidLocation(index){
+  let mid_locations = this.state.mid_locations;
+  mid_locations.splice(index, 1);
+  this.setState({mid_locations: mid_locations})
+}
+
   render() {
     return (
       <div>
         <form onSubmit={(event)=>this.getDistance(event)}>
           <input type="text" onChange={this.changeStartLoc.bind(this)}></input>
-          {this.state.mid_locations.map(mid_loc => <AdditionalLocation ref={mid_loc} locKey={mid_loc} key={mid_loc} />)}
+          {this.state.mid_locations.map((mid_loc, index) =>
+            <div key={mid_loc}>
+             <AdditionalLocation ref={mid_loc} locKey={mid_loc} key={mid_loc} />
+             <button type="button" onClick={(event) => this.removeMidLocation(index)}>Remove</button>
+            </div>
+          )}
           <input type="text" onChange={this.changeEndLoc.bind(this)}></input>
         </form>
-        <button onClick={this.addMidLocation.bind(this)}>Add Another Waypoint</button>
-        <button onClick={this.getDistance.bind(this)}>Calculate Distance</button>
+        <button onClick={(event) => this.addMidLocation()}>Add Another Waypoint</button>
+        <button onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
       </div>
     );
   }
