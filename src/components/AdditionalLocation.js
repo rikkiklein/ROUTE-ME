@@ -19,9 +19,7 @@ changeLocation(event){
 
   render() {
     return (
-      <div>
-        <input type="text" onChange={this.changeLocation.bind(this)}></input>
-      </div>
+      <input type="text" onChange={this.changeLocation.bind(this)}></input>
     );
   }
 }

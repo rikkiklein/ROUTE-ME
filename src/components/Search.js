@@ -8,7 +8,8 @@ class Search extends Component {
     super(props);
     this.state = {
       start: "",
-      end: ""
+      end: "",
+      mid_locations: ['mid-loc-0']
     }
   }
 
@@ -22,9 +23,9 @@ class Search extends Component {
       start: start,
       end: end
     }
-    utils.getDistanceMatrix(data).then((res) => {
-      console.log(res.data);
-  })
+  //   utils.getDistanceMatrix(data).then((res) => {
+  //     console.log(res.data);
+  // })
 }
 
 changeStartLoc(event){
@@ -35,15 +36,24 @@ changeEndLoc(event){
   this.setState({end: event.target.value })
 }
 
+addMidLocation(){
+  let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
+  let updatedLocations = this.state.mid_locations;
+  updatedLocations.push(newMidLocation)
+  this.setState({mid_locations: updatedLocations});
+}
+
   render() {
+
     return (
       <div>
         <form onSubmit={(event)=>this.getDistance(event)}>
           <input type="text" onChange={this.changeStartLoc.bind(this)}></input>
-          <AdditionalLocation location={this.getLocationState}/>
+          {this.state.mid_locations.map(mid_loc => <AdditionalLocation key={mid_loc}/>)}
           <input type="text" onChange={this.changeEndLoc.bind(this)}></input>
         </form>
-        <button onClick={this.getDistance.bind(this)}>click me</button>
+        <button onClick={this.addMidLocation.bind(this)}>Add Another Waypoint</button>
+        <button onClick={this.getDistance.bind(this)}>Calculate Distance</button>
       </div>
     );
   }
