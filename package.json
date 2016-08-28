@@ -10,6 +10,7 @@
     "react": "^15.3.1",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.1",
+    "react-geosuggest": "^1.25.0",
     "react-router": "^2.7.0"
   },
   "scripts": {

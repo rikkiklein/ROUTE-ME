@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import GeoSuggest from 'react-geosuggest';
 import '../css/search.css';
+import '../css/suggest.css';
 
 class AdditionalLocation extends Component {
 
@@ -10,14 +12,15 @@ class AdditionalLocation extends Component {
     }
   }
 
-  handleLocation(event){
-    let location = event.target.value;
-    this.setState({location: location})
+  handleLocation(value){
+    console.log(value.label);
+    this.setState({location: value.label})
   }
 
   render() {
+    let _this=this;
     return (
-      <input className="input-mid" type="text" id={this.props.locKey} onChange={this.handleLocation.bind(this)}></input>
+      <GeoSuggest id={_this.props.locKey}  onSuggestSelect={_this.handleLocation.bind(this)}/>
     );
   }
 }
