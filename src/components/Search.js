@@ -63,17 +63,27 @@ changeEndLoc(event){
 //   // console.log(this.state.mid_loc_values);
 // }
 
+// <div dangerouslySetInnerHTML ={{__html: 'Head \u003cb\u003esoutheast\u003c/b\u003e on \u003cb\u003eW 16th St\u003c/b\u003e toward \u003cb\u003eNinth Ave\u003c/b\u003e'}}/>
+
 addMidLocation(){
   let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
   let updatedLocations = this.state.mid_locations;
   updatedLocations.push(newMidLocation)
   this.setState({mid_locations: updatedLocations});
+
 }
 
 removeMidLocation(index){
   let mid_locations = this.state.mid_locations;
+  //remove mid-location
   mid_locations.splice(index, 1);
-  this.setState({mid_locations: mid_locations})
+  let updatedMidLocations = []
+  //adjust the new ids
+  for(let i = 0; i < mid_locations.length; i++){
+      updatedMidLocations.push("mid-loc-"+i);
+  }
+  this.setState({mid_locations: updatedMidLocations})
+
 }
 
   render() {

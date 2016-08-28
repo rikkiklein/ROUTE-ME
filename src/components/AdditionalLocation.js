@@ -9,15 +9,10 @@ class AdditionalLocation extends Component {
     }
   }
 
-handleLocation(event){
-  let location = event.target.value;
-  this.setState({location: location})
-//  this.props.onChange(this.props.locKey, location);
-}
-
-// getLocation(){
-//   return this.props.location(this.props.locKey, this.state.location);
-// }
+  handleLocation(event){
+    let location = event.target.value;
+    this.setState({location: location})
+  }
 
   render() {
     return (
