@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+
+  /*display: flex;
+  justify-content: center;
+  align-items: center;*/
+}
+
+.button{
+  background: rgba(255,255,155, .783);
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 1em;
+  font-size: .7em;
+  letter-spacing: .2em;
+  width: 45%;
+  transition:
+  width 1.5s,
+  height 1.5s,
+  background 2s,
+  transform 2s,
+  color 2s,
+  border 0.15s linear;
+  margin: 1%;
+  height: 8vh;
+  text-transform: uppercase;
+}
+
+.button:hover{
+  border: 1px solid blue;
+}
+
+.button a{
+  font-family: helvetica;
+  text-transform: uppercase;
+}
+
+h5{
+  color: #ff6666;
+}

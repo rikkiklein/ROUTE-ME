@@ -1,0 +1,53 @@
+.nav-ul{
+  background: rgba(0,0,0,.63);
+  background: #445566;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: .5em;
+  width: 100vw;
+  position:relative;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+  transition:
+  width 1.5s,
+  height 1.5s,
+  background 2s,
+  transform 2s,
+  color 2s,
+  border 0.15s linear;
+  font-family: Kavoon;
+  letter-spacing: .1em;
+}
+
+a:hover{
+  color: #ff6666;
+  text-decoration: none;
+}
+
+span.hideGlyph{
+  display: none;
+}
+
+span.hideText{
+  display: block;
+}
+
+
+@media screen and (max-width: 736px){
+  .nav-ul{
+    background: #445566;
+    height: 8vh;
+  }
+
+
+  span.hideGlyph{
+    display: block;
+  }
+  span.hideText{
+    display: none;
+  }
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../css/search.css';
 
 class AdditionalLocation extends Component {
 
@@ -16,7 +17,7 @@ class AdditionalLocation extends Component {
 
   render() {
     return (
-      <input type="text" id={this.props.locKey} onChange={this.handleLocation.bind(this)}></input>
+      <input className="input-mid" type="text" id={this.props.locKey} onChange={this.handleLocation.bind(this)}></input>
     );
   }
 }

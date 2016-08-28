@@ -1,0 +1,87 @@
+.middle-outer-outer-search{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  width: 100%;
+  padding: 1%;
+}
+
+.middle-outer-search{
+  width: 90%;
+}
+
+.middle-search{
+  /*border: 1px solid white;*/
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  height: 80vh;
+}
+
+.header{
+  width: 100%;
+  text-align: center;
+}
+
+.mid-form{
+  width: 100%;
+}
+
+form{
+  width: 100%;
+  border: 1px solid rgba(0,0,0,.13);
+  border-radius: 5px;
+  height: 55vh;
+  overflow:auto;
+  padding: 1em;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  overflow:auto;
+
+}
+
+input{
+  width: 80%;
+  height: 8vh;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: .6em;
+  border: 1px solid rgba(0,0,0,.14);
+  margin: 1%;
+}
+
+.but-area{
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  margin-top: 1%;
+}
+
+.button-del{
+  width: 10%;
+  background: rgba(255,55,155, .783);
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 1em;
+  font-size: .7em;
+  letter-spacing: .2em;
+  transition:
+  width 1.5s,
+  height 1.5s,
+  background 2s,
+  transform 2s,
+  color 2s,
+  border 0.15s linear;
+  margin: 1%;
+  height: 8vh;
+  text-transform: uppercase;
+}
+
+.input-mid{
+  width: 68%;
+}

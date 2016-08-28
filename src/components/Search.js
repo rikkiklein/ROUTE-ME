@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
-import utils from '../utils/helper.js'
-import AdditionalLocation from "./AdditionalLocation.js"
+import React, { Component }   from 'react';
+import utils                  from '../utils/helper.js'
+import AdditionalLocation     from "./AdditionalLocation.js"
+import NavBar                 from './NavBar.js';
+import Footer                 from './Footer.js';
+import Header                 from './Header.js';
+import '../css/search.css';
 
 class Search extends Component {
 
@@ -83,24 +87,46 @@ removeMidLocation(index){
       updatedMidLocations.push("mid-loc-"+i);
   }
   this.setState({mid_locations: updatedMidLocations})
-
 }
 
   render() {
     return (
       <div>
-        <form onSubmit={(event)=>this.getDistance(event)}>
-          <input type="text" onChange={this.changeStartLoc.bind(this)}></input>
-          {this.state.mid_locations.map((mid_loc, index) =>
-            <div key={mid_loc}>
-             <AdditionalLocation ref={mid_loc} locKey={mid_loc} key={mid_loc} />
-             <button type="button" onClick={(event) => this.removeMidLocation(index)}>Remove</button>
+        <div>
+          <Header/>
+          <NavBar/>
+          <div className="middle-outer-outer-search">
+            <div className="middle-outer-search">
+              <div className="middle-search">
+                <div className="header">
+                  <h5>Fill out your start, midddle and end locations!</h5>
+                </div>
+
+
+
+                <div className="mid-form">
+                  <form onSubmit={(event)=>this.getDistance(event)}>
+                    <input className="input" type="text" onChange={this.changeStartLoc.bind(this)} placeholder="start location..."></input>
+                    {this.state.mid_locations.map((mid_loc, index) =>
+                      <div key={mid_loc}>
+                        <AdditionalLocation ref={mid_loc} locKey={mid_loc} key={mid_loc} />
+                        <button className="button-del" type="button" onClick={(event) => this.removeMidLocation(index)}>X</button>
+                      </div>
+                    )}
+                    <input className="input" type="text" onChange={this.changeEndLoc.bind(this)} placeholder="end location..."></input>
+                  </form>
+                </div>
+
+                <div className="but-area">
+                  <button className="button" onClick={(event) => this.addMidLocation()}>Add Waypoint</button>
+                  <button className="button" onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
+                </div>
+
+              </div>
             </div>
-          )}
-          <input type="text" onChange={this.changeEndLoc.bind(this)}></input>
-        </form>
-        <button onClick={(event) => this.addMidLocation()}>Add Another Waypoint</button>
-        <button onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
+          </div>
+          <Footer/>
+        </div>
       </div>
     );
   }

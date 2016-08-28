@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import './App.css';
-import { Link } from 'react-router';
+import { Link }             from 'react-router';
+import Background           from "./components/Background.js";
+import './css/App.css';
 
 class App extends Component {
 
   render() {
     return (
       <div className="App">
-        <div className="header-link"><Link to="/">Home</Link></div>
-        <div className="header-link"><Link to="/search">Search</Link></div>
+        <Background/>
       </div>
     );
   }

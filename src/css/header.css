@@ -1,0 +1,57 @@
+.header-outer{
+  display: flex;
+  flex-direction: row;
+  height: 50vh;
+  position: static;
+}
+
+.right{
+  order: 2;
+  width: 50%;
+  background: rgba(0,0,0, .5);
+  border-left: 4px solid rgba(255,255,255, .864);
+  color: white;
+  padding: 3em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.left{
+  order: 1;
+  background: url('road.jpg');
+  background-image:
+        linear-gradient(top, rgba(255,255,255,0.5235), rgba(255,255,255,0.46235)), url("road.jpg");
+  background-position: right right;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 50%;
+}
+
+
+@media screen and (max-width: 736px){
+
+  .header-outer{
+    display: block;
+    position: absolute;
+  }
+
+  .right{
+    width: 100%;
+    border-left: 4px solid transparent;
+
+  }
+
+  .left{
+    width: 100%;
+    height: 60%;
+    background: url('road.jpg');
+    background-image:
+          linear-gradient(top, rgba(255,255,255,0.5235), rgba(255,255,255,0.46235)), url("road.jpg");
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
