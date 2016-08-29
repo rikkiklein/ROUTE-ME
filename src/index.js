@@ -12,7 +12,6 @@ ReactDOM.render(
      <Route path="/" component={App}/>
      <Route path="/search" component={Search}></Route>
       <Route path="/saved-routes" component={SavedRoutes}></Route>
-
      <Route path="/about" component={About}></Route>
  </Router>
   ,document.getElementById('root')

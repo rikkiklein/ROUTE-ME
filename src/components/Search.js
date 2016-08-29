@@ -1,10 +1,12 @@
 import React, { Component }   from 'react';
 import utils                  from '../utils/helper.js'
-import GeoSuggest from 'react-geosuggest';
+import GeoSuggest             from 'react-geosuggest';
 import AdditionalLocation     from "./AdditionalLocation.js"
 import NavBar                 from './NavBar.js';
 import Footer                 from './Footer.js';
 import Header                 from './Header.js';
+import SavedRoutes            from './SavedRoutes.js';
+import { browserHistory }     from 'react-router';
 import '../css/search.css';
 import '../css/suggest.css';
 
@@ -16,7 +18,8 @@ class Search extends Component {
       start: "",
       end: "",
       mid_locations: [],
-      gm_locations: []
+      gm_locations: [],
+      shortest_route: []
     }
   }
 
@@ -25,13 +28,10 @@ class Search extends Component {
     let start = this.state.start;
     let end = this.state.end;
     let midLocations = []
-    //look at the refs and get each of the mid-locations values
+
     for(let prop in this.refs){
       midLocations.push(this.refs[prop].state.location);
     }
-
-    console.log("start is", start, "end is", end);
-    console.log("mid locations are: ", midLocations);
 
     let data = {
       start: start,
@@ -40,20 +40,16 @@ class Search extends Component {
     }
 
     utils.getDistanceMatrix(data).then((res) => {
-      console.log(res.data);
       let bm = this.makeMatrixBM(res.data.BM);
       let mm = this.makeMatrixMM(res.data.MM);
       let gmMid_locations = [];
-      //make 'dummy' mid-locations array representing the data from google maps
       for(let i = 0; i < mm.length; i++){
-          if(!gmMid_locations.includes(mm[i].origin)){
-            gmMid_locations.push(mm[i].origin);
-          }
+        if(!gmMid_locations.includes(mm[i].origin)){
+          gmMid_locations.push(mm[i].origin);
+        }
       }
       this.setState({gm_locations: gmMid_locations});
-
       let me = this.makeMatrixME(res.data.ME);
-
       this.makeFullMatrix(bm, mm, me);
     })
 
@@ -66,11 +62,9 @@ class Search extends Component {
     let start = this.state.start;
     let shortestPath = [start]
 
-    //get the shortest path from the starting point and to any of the middle locations
     let min = matrix[0][0].distance;
     let minName = matrix[0][0].destination;
 
-    //go through each B-M place and figure out the shortest initial path
     for(let i = 1; i < matrix[0].length; i++){
       if(matrix[0][i].distance < min){
         min = matrix[0][i].distance;
@@ -78,18 +72,11 @@ class Search extends Component {
       }
     }
     shortestPath.push(minName)
-    console.log("shortest path", shortestPath);
 
-    //get shortest path between SP that we just got and the middle array.
-    //visited++ when we compare the distance between SP and the other nodes.
-    //once visited === locations.length we know all the nodes have been visited.
     let minOrigin = minName;
     let visited = 1;
     let midLocLength = this.state.mid_locations.length;
-
-    //sort matrix[1] by origin
     let middleMatrix = matrix[1];
-
 
     middleMatrix.sort((a, b) => {
       return a.origin > b.origin;
@@ -107,31 +94,23 @@ class Search extends Component {
         }
       } //end for loop
 
-      console.log("min name", currentMinName);
-      console.log("middle matrix", middleMatrix);
-      console.log("shortestPath", shortestPath);
-
       let originMinDistance = originArray[0].distance;
       let originMinName     = originArray[0].destination;
-      console.log("originMinName", originMinName, "originMinDistance", originMinDistance);
-      console.log("originArray", originArray);
-      for(let i = 1; i < originArray.length; i++){
-          console.log("originArray[i]", originArray[i]);
-          console.log("originArray[i].distance", originArray[i].distance, "originMD", originMinDistance);
-          if(originArray[i].distance < originMinDistance){
-            originMinDistance = originArray[i].distance;
-            originMinName = originArray[i].destination;
 
-          }
+      for(let i = 1; i < originArray.length; i++){
+        if(originArray[i].distance < originMinDistance){
+          originMinDistance = originArray[i].distance;
+          originMinName = originArray[i].destination;
+        }
       }
-      console.log("smallest next dest is", originMinName, originMinDistance);
+
       shortestPath.push(originMinName);
       minName = originMinName;
       visited++;
     }
+
     let gm_locations =  this.state.gm_locations;
-    console.log("###gm_locations is", gm_locations);
-    console.log("###shortest path is", shortestPath);
+
     for(let i = 1; i < shortestPath.length; i++){
       if(gm_locations.includes(shortestPath[i])){
         let index = gm_locations.indexOf(shortestPath[i]);
@@ -142,8 +121,13 @@ class Search extends Component {
     if(gm_locations.length !== 0){
         shortestPath[shortestPath.length-1] = gm_locations.pop();
     }
-    // console.log("midLocationsIndicies", midLocationsIndicies);
+    shortestPath.push(this.state.end);
     console.log("WE ARE DONE", shortestPath);
+
+    this.setState({
+      shortest_route: shortestPath
+    })
+
   } //end func
 
   makeFullMatrix(bm, mm, me){
@@ -376,6 +360,7 @@ class Search extends Component {
               </div>
             </div>
           </div>
+          <SavedRoutes rt={this.state.shortest_route}/>
           <Footer/>
         </div>
       </div>
