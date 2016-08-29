@@ -15,8 +15,7 @@ class Search extends Component {
     this.state = {
       start: "",
       end: "",
-      mid_locations: [],
-      destination: ""
+      mid_locations: []
     }
   }
 
@@ -48,6 +47,11 @@ class Search extends Component {
       this.makeFullMatrix(bm, mm, me);
     })
 
+  }
+
+  solveTSP(matrix){
+    // we are planning to solve the TSP by nearest neighbor
+    //https://en.wikipedia.org/wiki/Nearest_neighbor_search
 
   }
 
@@ -63,13 +67,15 @@ class Search extends Component {
     for(let i = 0; i < mm.length; i++){
       fullMatrix.push(mm[i]);
     }
-
+    //add me
     for(let i = 0; i < me.length; i++){
       fullMatrix.push(me[i]);
     }
 
-
     console.log("full matrix", fullMatrix);
+
+    //solve TSP
+    this.solveTSP(fullMatrix);
 
   }
 
@@ -160,12 +166,24 @@ makeMatrixMM(data){
         }
       }
 
+      //edit the MM matrix for extra data
+      for(let i = 0; i < arrayToPush.length; i++){
+      // prune the rows that have distance equal to 0
+        if(arrayToPush[i].distance === 0){
+          arrayToPush.splice(i, 1);
+        }
+      }
+
     }
 
   }
+  //only need half of the results because A-B and B-A are the same thing, we don't need both since they are associative
+  let halfLength = Math.ceil(arrayToPush.length / 2)
+  let upperHalf = arrayToPush.splice(0, halfLength);
 
   console.log("array to push in mm", arrayToPush);
-  return arrayToPush;
+  console.log("half of the array", upperHalf);
+  return upperHalf;
 } //end of function
 
 makeMatrixME(data){
@@ -207,7 +225,7 @@ changeEndLoc(input){
 // <div dangerouslySetInnerHTML ={{__html: 'Head \u003cb\u003esoutheast\u003c/b\u003e on \u003cb\u003eW 16th St\u003c/b\u003e toward \u003cb\u003eNinth Ave\u003c/b\u003e'}}/>
 
 addMidLocation(){
-    //limit the mid locations
+    //limit the mid locations since solving TSP get's longer the more points you have
     if(this.state.mid_locations.length < 5){
       let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
       let updatedLocations = this.state.mid_locations;
