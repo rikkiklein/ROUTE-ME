@@ -53,24 +53,44 @@ class Search extends Component {
     // we are planning to solve the TSP by nearest neighbor
     //https://en.wikipedia.org/wiki/Nearest_neighbor_search
 
-  }
+    let start = this.state.start;
+    let shortestPath = [start]
 
+    //get the shortest path from the starting point and to any of the middle locations
+    let min = matrix[0][0].distance;
+    let minName = matrix[0][0].destination;
+
+    //go through each B-M place and figure out the shortest initial path
+    for(let i = 1; i < matrix[0].length; i++){
+      if(matrix[0][i].distance < min){
+        min = matrix[0][i].distance;
+        minName = matrix[0][i].destination;
+      }
+    }
+    shortestPath.push(minName)
+    console.log("shortest path", shortestPath);
+
+  }
+å
   makeFullMatrix(bm, mm, me){
     let fullMatrix = [];
 
-    // add bm
-    for(let i = 0; i < bm.length; i++){
-      fullMatrix.push(bm[i]);
-    }
-
-    //add mm
-    for(let i = 0; i < mm.length; i++){
-      fullMatrix.push(mm[i]);
-    }
-    //add me
-    for(let i = 0; i < me.length; i++){
-      fullMatrix.push(me[i]);
-    }
+    fullMatrix.push(bm);
+    fullMatrix.push(mm);
+    fullMatrix.push(me);
+    // // add bm
+    // for(let i = 0; i < bm.length; i++){
+    //   fullMatrix.push(bm[i]);
+    // }
+    //
+    // //add mm
+    // for(let i = 0; i < mm.length; i++){
+    //   fullMatrix.push(mm[i]);
+    // }
+    // //add me
+    // for(let i = 0; i < me.length; i++){
+    //   fullMatrix.push(me[i]);
+    // }
 
     console.log("full matrix", fullMatrix);
 
