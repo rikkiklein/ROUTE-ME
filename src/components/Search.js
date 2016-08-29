@@ -15,7 +15,8 @@ class Search extends Component {
     this.state = {
       start: "",
       end: "",
-      mid_locations: []
+      mid_locations: [],
+      gm_locations: []
     }
   }
 
@@ -42,6 +43,15 @@ class Search extends Component {
       console.log(res.data);
       let bm = this.makeMatrixBM(res.data.BM);
       let mm = this.makeMatrixMM(res.data.MM);
+      let gmMid_locations = [];
+      //make 'dummy' mid-locations array representing the data from google maps
+      for(let i = 0; i < mm.length; i++){
+          if(!gmMid_locations.includes(mm[i].origin)){
+            gmMid_locations.push(mm[i].origin);
+          }
+      }
+      this.setState({gm_locations: gmMid_locations});
+
       let me = this.makeMatrixME(res.data.ME);
 
       this.makeFullMatrix(bm, mm, me);
@@ -70,8 +80,72 @@ class Search extends Component {
     shortestPath.push(minName)
     console.log("shortest path", shortestPath);
 
-  }
-å
+    //get shortest path between SP that we just got and the middle array.
+    //visited++ when we compare the distance between SP and the other nodes.
+    //once visited === locations.length we know all the nodes have been visited.
+    let minOrigin = minName;
+    let visited = 1;
+    let midLocLength = this.state.mid_locations.length;
+
+    //sort matrix[1] by origin
+    let middleMatrix = matrix[1];
+
+
+    middleMatrix.sort((a, b) => {
+      return a.origin > b.origin;
+    });
+
+    while(visited !== midLocLength){
+      let originArray = [];
+      let currentVisitedNode = false;
+      let currentMinName = minName;
+
+      for(let i = 0; i < middleMatrix.length; i++){
+        if(middleMatrix[i].origin === currentMinName){
+          console.log("they are equal!");
+          originArray.push(middleMatrix[i]);
+        }
+      } //end for loop
+
+      console.log("min name", currentMinName);
+      console.log("middle matrix", middleMatrix);
+      console.log("shortestPath", shortestPath);
+
+      let originMinDistance = originArray[0].distance;
+      let originMinName     = originArray[0].destination;
+      console.log("originMinName", originMinName, "originMinDistance", originMinDistance);
+      console.log("originArray", originArray);
+      for(let i = 1; i < originArray.length; i++){
+          console.log("originArray[i]", originArray[i]);
+          console.log("originArray[i].distance", originArray[i].distance, "originMD", originMinDistance);
+          if(originArray[i].distance < originMinDistance){
+            originMinDistance = originArray[i].distance;
+            originMinName = originArray[i].destination;
+
+          }
+      }
+      console.log("smallest next dest is", originMinName, originMinDistance);
+      shortestPath.push(originMinName);
+      minName = originMinName;
+      visited++;
+    }
+    let gm_locations =  this.state.gm_locations;
+    console.log("###gm_locations is", gm_locations);
+    console.log("###shortest path is", shortestPath);
+    for(let i = 1; i < shortestPath.length; i++){
+      if(gm_locations.includes(shortestPath[i])){
+        let index = gm_locations.indexOf(shortestPath[i]);
+        gm_locations.splice(index, 1);
+      }
+    }
+    console.log("GM LOCATIONS", gm_locations);
+    if(gm_locations.length !== 0){
+        shortestPath[shortestPath.length-1] = gm_locations.pop();
+    }
+    // console.log("midLocationsIndicies", midLocationsIndicies);
+    console.log("WE ARE DONE", shortestPath);
+  } //end func
+
   makeFullMatrix(bm, mm, me){
     let fullMatrix = [];
 
@@ -99,173 +173,175 @@ class Search extends Component {
 
   }
 
-makeMatrixBM(data){
-  let arrayToPush = [];
+  makeMatrixBM(data){
+    let arrayToPush = [];
 
-  for(let i = 0; i < data.destination_addresses.length; i++){
-    arrayToPush.push({origin: "", destination: "", distance: 0});
-  } //end for loop
-
-  for(let prop in data){
-    if(prop==="destination_addresses"){
-      for(let i = 0; i < data[prop].length;i++){
-        arrayToPush[i].destination = data[prop][i];
-      }
-    } //end if
-
-    if(prop==="origin_addresses"){
-      for(let i = 0; i <arrayToPush.length;i++){
-        arrayToPush[i].origin = data[prop][0];
-      }
-    } //end if
-
-    if(prop==="rows"){
-      let elements = data[prop][0].elements;
-      for(let i = 0; i < elements.length;i++){
-        arrayToPush[i].distance = elements[i].distance.value;
-      }
-    }//end if
-  }//end of for let prop
-
-  console.log("ARRAY TO PUSH: ", arrayToPush);
-  return arrayToPush;
-} //end of function
-
-makeMatrixMM(data){
-  console.log("mm is", data);
-  let arrayToPush = [];
-  for(let i = 0; i < data.destination_addresses.length; i++){
-    for(let j = 0; j < data.origin_addresses.length;j++)
+    for(let i = 0; i < data.destination_addresses.length; i++){
       arrayToPush.push({origin: "", destination: "", distance: 0});
-  }
+    } //end for loop
 
-  for(let prop in data){
-    if(prop === "destination_addresses"){
-      let len = data[prop].length;
-      let count = 0;
-      console.log("len is", len);
-      let limit = len * len;
-        for(let d = 0; d < limit; d+=len){
-          console.log("d is", d);
-          let upperBound = d + len;
-          count = 0;
-          for(let k = d; k < upperBound; k++){
-            arrayToPush[k].destination = data[prop][count];
+    for(let prop in data){
+      if(prop==="destination_addresses"){
+        for(let i = 0; i < data[prop].length;i++){
+          arrayToPush[i].destination = data[prop][i];
+        }
+      } //end if
+
+      if(prop==="origin_addresses"){
+        for(let i = 0; i <arrayToPush.length;i++){
+          arrayToPush[i].origin = data[prop][0];
+        }
+      } //end if
+
+      if(prop==="rows"){
+        let elements = data[prop][0].elements;
+        for(let i = 0; i < elements.length;i++){
+          arrayToPush[i].distance = elements[i].distance.value;
+        }
+      }//end if
+    }//end of for let prop
+
+    console.log("ARRAY TO PUSH: ", arrayToPush);
+    return arrayToPush;
+  } //end of function
+
+  makeMatrixMM(data){
+    console.log("mm is", data);
+    let arrayToPush = [];
+    for(let i = 0; i < data.destination_addresses.length; i++){
+      for(let j = 0; j < data.origin_addresses.length;j++)
+        arrayToPush.push({origin: "", destination: "", distance: 0});
+    }
+
+    for(let prop in data){
+      if(prop === "destination_addresses"){
+        let len = data[prop].length;
+        let count = 0;
+        console.log("len is", len);
+        let limit = len * len;
+          for(let d = 0; d < limit; d+=len){
+            console.log("d is", d);
+            let upperBound = d + len;
+            count = 0;
+            for(let k = d; k < upperBound; k++){
+              arrayToPush[k].destination = data[prop][count];
+              count++;
+            }
+          }
+        }
+      if(prop === "origin_addresses"){
+        let len = data[prop].length;
+        let count = -1;
+        console.log("len is", len);
+        let limit = len * len;
+          for(let d = 0; d < limit; d+=len){
+            console.log("d is", d);
+            let upperBound = d + len;
             count++;
+            for(let k = d; k < upperBound; k++){
+              arrayToPush[k].origin = data[prop][count];
+            }
+          }
+      }
+
+      if(prop === "rows"){
+        console.log("rows prop", data[prop]);
+        let len = data[prop].length;
+        let index = 0;
+        // let count = -1;
+        console.log("len is", len);
+        //looping thru outer rows
+        for(let i = 0; i < len; i++){
+          //loop thru elements
+          for(let j = 0; j<data[prop][i].elements.length; j++){
+            console.log("$$$$",j, data[prop][i].elements[j].distance.value);
+            arrayToPush[index].distance = data[prop][i].elements[j].distance.value;
+            index++;
           }
         }
-    }
-    if(prop === "origin_addresses"){
-      let len = data[prop].length;
-      let count = -1;
-      console.log("len is", len);
-      let limit = len * len;
-        for(let d = 0; d < limit; d+=len){
-          console.log("d is", d);
-          let upperBound = d + len;
-          count++;
-          for(let k = d; k < upperBound; k++){
-            arrayToPush[k].origin = data[prop][count];
+
+        //edit the MM matrix for extra data
+        for(let i = 0; i < arrayToPush.length; i++){
+        // prune the rows that have distance equal to 0
+          if(arrayToPush[i].distance === 0){
+            arrayToPush.splice(i, 1);
           }
         }
-    }
 
-    if(prop === "rows"){
-      console.log("rows prop", data[prop]);
-      let len = data[prop].length;
-      let index = 0;
-      // let count = -1;
-      console.log("len is", len);
-      //looping thru outer rows
-      for(let i = 0; i < len; i++){
-        //loop thru elements
-        for(let j = 0; j<data[prop][i].elements.length; j++){
-          console.log("$$$$",j, data[prop][i].elements[j].distance.value);
-          arrayToPush[index].distance = data[prop][i].elements[j].distance.value;
-          index++;
+      }
+
+
+
+    }
+    //only need half of the results because A-B and B-A are the same thing, we don't need both since they are associative
+    // let halfLength = Math.floor(arrayToPush.length / 2);
+    // let upperHalf = arrayToPush.splice(0, halfLength);
+    //
+    // console.log("array to push in mm", arrayToPush);
+    // console.log("half of the array", upperHalf);
+    return arrayToPush;
+  } //end of function
+
+  makeMatrixME(data){
+    console.log(data);
+    let arrayToPush = [];
+    for(let i = 0; i < data.origin_addresses.length; i++){
+      arrayToPush.push({origin: "", destination: "", distance: 0});
+    }
+    for(let prop in data){
+      if(prop === "destination_addresses"){
+        for(let i = 0; i < arrayToPush.length;i++){
+          arrayToPush[i].destination = data[prop][0];
         }
       }
-
-      //edit the MM matrix for extra data
-      for(let i = 0; i < arrayToPush.length; i++){
-      // prune the rows that have distance equal to 0
-        if(arrayToPush[i].distance === 0){
-          arrayToPush.splice(i, 1);
+      if(prop === "origin_addresses"){
+        for(let i = 0; i < data[prop].length;i++){
+          arrayToPush[i].origin = data[prop][i];
         }
       }
-
-    }
-
-  }
-  //only need half of the results because A-B and B-A are the same thing, we don't need both since they are associative
-  let halfLength = Math.ceil(arrayToPush.length / 2)
-  let upperHalf = arrayToPush.splice(0, halfLength);
-
-  console.log("array to push in mm", arrayToPush);
-  console.log("half of the array", upperHalf);
-  return upperHalf;
-} //end of function
-
-makeMatrixME(data){
-  console.log(data);
-  let arrayToPush = [];
-  for(let i = 0; i < data.origin_addresses.length; i++){
-    arrayToPush.push({origin: "", destination: "", distance: 0});
-  }
-  for(let prop in data){
-    if(prop === "destination_addresses"){
-      for(let i = 0; i < arrayToPush.length;i++){
-        arrayToPush[i].destination = data[prop][0];
+      if(prop === "rows"){
+        let rows = data[prop];
+        for(let i = 0; i < rows.length;i++){
+           arrayToPush[i].distance = rows[i].elements[0].distance.value;
+        }
       }
     }
-    if(prop === "origin_addresses"){
-      for(let i = 0; i < data[prop].length;i++){
-        arrayToPush[i].origin = data[prop][i];
-      }
-    }
-    if(prop === "rows"){
-      let rows = data[prop];
-      for(let i = 0; i < rows.length;i++){
-         arrayToPush[i].distance = rows[i].elements[0].distance.value;
-      }
-    }
+
+    console.log("atP", arrayToPush);
+    return arrayToPush;
+  } //end of function
+
+  changeStartLoc(input){
+    this.setState({start: input.label })
   }
 
-  console.log("atP", arrayToPush);
-  return arrayToPush;
-} //end of function
-
-changeStartLoc(input){
-  this.setState({start: input.label })
-}
-
-changeEndLoc(input){
-  this.setState({end: input.label })
-}
-// <div dangerouslySetInnerHTML ={{__html: 'Head \u003cb\u003esoutheast\u003c/b\u003e on \u003cb\u003eW 16th St\u003c/b\u003e toward \u003cb\u003eNinth Ave\u003c/b\u003e'}}/>
-
-addMidLocation(){
-    //limit the mid locations since solving TSP get's longer the more points you have
-    if(this.state.mid_locations.length < 5){
-      let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
-      let updatedLocations = this.state.mid_locations;
-      updatedLocations.push(newMidLocation)
-      this.setState({mid_locations: updatedLocations});
-    }
-
-}
-
-removeMidLocation(index){
-  let mid_locations = this.state.mid_locations;
-  //remove mid-location
-  mid_locations.splice(index, 1);
-  let updatedMidLocations = []
-  //adjust the new ids
-  for(let i = 0; i < mid_locations.length; i++){
-      updatedMidLocations.push("mid-loc-"+i);
+  changeEndLoc(input){
+    this.setState({end: input.label })
   }
-  this.setState({mid_locations: updatedMidLocations})
-}
+  // <div dangerouslySetInnerHTML ={{__html: 'Head \u003cb\u003esoutheast\u003c/b\u003e on \u003cb\u003eW 16th St\u003c/b\u003e toward \u003cb\u003eNinth Ave\u003c/b\u003e'}}/>
+
+  addMidLocation(){
+      //limit the mid locations since solving TSP get's longer the more points you have
+      if(this.state.mid_locations.length < 5){
+        let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
+        let updatedLocations = this.state.mid_locations;
+        updatedLocations.push(newMidLocation)
+        this.setState({mid_locations: updatedLocations});
+      }
+
+  }
+
+  removeMidLocation(index){
+    let mid_locations = this.state.mid_locations;
+    //remove mid-location
+    mid_locations.splice(index, 1);
+    let updatedMidLocations = []
+    //adjust the new ids
+    for(let i = 0; i < mid_locations.length; i++){
+        updatedMidLocations.push("mid-loc-"+i);
+    }
+    this.setState({mid_locations: updatedMidLocations})
+  }
 
   render() {
     return (
@@ -279,9 +355,6 @@ removeMidLocation(index){
                 <div className="header">
                   <h5>Fill out your start, middle and end locations!</h5>
                 </div>
-
-
-
 
                 <div className="mid-form">
                   <form onSubmit={(event)=>this.getDistance(event)}>
