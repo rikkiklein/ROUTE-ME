@@ -232,7 +232,7 @@ removeMidLocation(index){
             <div className="middle-outer-search">
               <div className="middle-search">
                 <div className="header">
-                  <h5>Fill out your start, midddle and end locations!</h5>
+                  <h5>Fill out your start, middle and end locations!</h5>
                 </div>
 
 
@@ -242,7 +242,7 @@ removeMidLocation(index){
                   <form onSubmit={(event)=>this.getDistance(event)}>
                     <GeoSuggest className="input" onSuggestSelect={this.changeStartLoc.bind(this)} placeholder="start location..."/>
                     {this.state.mid_locations.map((mid_loc, index) =>
-                      <div key={mid_loc}>
+                      <div id="additional" key={mid_loc}>
                         <AdditionalLocation ref={mid_loc} locKey={mid_loc} key={mid_loc} />
                         <button className="button-del" type="button" onClick={(event) => this.removeMidLocation(index)}>X</button>
                       </div>
