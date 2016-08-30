@@ -8,17 +8,19 @@ class AdditionalLocation extends Component {
   constructor(props){
     super(props);
     this.state = {
-      location: ""
+      location: "",
+      latlong: ""
     }
   }
 
   handleLocation(value){
     console.log(value.label);
-    this.setState({location: value.label})
+    this.setState({location: value.label, latlong: value.location})
   }
 
   render() {
     let _this=this;
+    console.log(this.state);
     return (
       <GeoSuggest id={_this.props.locKey}  onSuggestSelect={_this.handleLocation.bind(this)}/>
     );
