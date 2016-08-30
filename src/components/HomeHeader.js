@@ -13,7 +13,13 @@ class HomeHeader extends Component {
     return (
       <div className="home-header-outer">
         <div className="welcome-message">
-          Hey here is a moving welcome message
+          <div className="welcome-title">
+            Welcome to Route Calculator
+          </div>
+          <p className="welcome-p">
+            Optimize your multiple stop route by
+            using the Traveling Saleman Algorithm!
+            </p>
         </div>
       </div>
     );

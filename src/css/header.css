@@ -69,7 +69,7 @@
 
 .welcome-message{
     animation: 5s welcome-message linear;
-    animation: 15s swing-message infinite;
+    animation: 15s welcome-message-swing infinite;
     color: #445566;
     border: 1px solid #445566;
     background: rgba(255,255,255, .7584);
@@ -91,12 +91,32 @@
     box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
 }
 
+.welcome-p{
+  text-transform: capitalize;
+  font-size: .8em;
+  text-align: center;
+  color: gray;
+  border-top: 3px solid #445566;
+  border-top: 3px solid #446666;
+
+  padding: 1em;
+}
+.welcome-title{
+  /*text-transform: capitalize;
+  font-size: .8em;
+  text-align: center;
+  color: gray;
+  border-top: 3px solid #445566;*/
+  padding: 1em;
+  text-align: center;
+}
+
 @keyframes welcome-message{
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
 
-@keyframes swing-message{
+@keyframes welcome-message-swing{
     0% { transform: rotate(0deg); }
     20% { transform: rotate(10deg); }
     40% { transform: rotate(-10deg); }
