@@ -19,7 +19,11 @@ class Search extends Component {
       end: "",
       mid_locations: [],
       gm_locations: [],
-      shortest_route: []
+      shortest_route: [],
+      start_lat_long: "",
+      end_lat_long: "",
+      mid_locationsLatLong: []
+
     }
   }
 
@@ -28,10 +32,14 @@ class Search extends Component {
     let start = this.state.start;
     let end = this.state.end;
     let midLocations = []
-
+    let latLong = []
     for(let prop in this.refs){
       midLocations.push(this.refs[prop].state.location);
+      let key = this.refs[prop].state.location;
+      latLong.push({[key]: this.refs[prop].state.latlong })
     }
+
+    this.setState({mid_locationsLatLong: latLong});
 
     let data = {
       start: start,
@@ -51,7 +59,17 @@ class Search extends Component {
       this.setState({gm_locations: gmMid_locations});
       let me = this.makeMatrixME(res.data.ME);
       this.makeFullMatrix(bm, mm, me);
+
+      //get the lat and long
+      let latLongs = [];
+      latLongs.push(this.state.start_lat_long);
+      latLongs.push(this.state.mid_locationsLatLong);
+      latLongs.push(this.state.end_lat_long);
+
+      console.log("LAT LONGGGG", latLongs);
     })
+
+
 
   }
 
@@ -127,6 +145,7 @@ class Search extends Component {
     this.setState({
       shortest_route: shortestPath
     })
+
 
   } //end func
 
@@ -296,11 +315,11 @@ class Search extends Component {
   } //end of function
 
   changeStartLoc(input){
-    this.setState({start: input.label })
+    this.setState({start: input.label, start_lat_long: input.location })
   }
 
   changeEndLoc(input){
-    this.setState({end: input.label })
+    this.setState({end: input.label, end_lat_long: input.location })
   }
   // <div dangerouslySetInnerHTML ={{__html: 'Head \u003cb\u003esoutheast\u003c/b\u003e on \u003cb\u003eW 16th St\u003c/b\u003e toward \u003cb\u003eNinth Ave\u003c/b\u003e'}}/>
 

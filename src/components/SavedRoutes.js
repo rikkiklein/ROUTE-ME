@@ -1,11 +1,15 @@
-import React, { Component }   from 'react';
-import utils                  from '../utils/helper.js'
-import { Link }               from 'react-router';
+import React, {Component}   from 'react';
+import utils                           from '../utils/helper.js'
+import { Link }                        from 'react-router';
 import '../css/footer.css';
 import '../css/search.css';
-import Background             from './Background.js';
+import Background                      from './Background.js';
+
+import GoogleMap                       from 'google-map-react';
 
 class SavedRoutes extends Component {
+
+
   constructor(props){
     super(props);
   }
