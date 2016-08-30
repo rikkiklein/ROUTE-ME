@@ -17,8 +17,8 @@
   padding: 5em;
 }
 
-.right{
-  order: 2;
+.left{
+  order: 1;
   width: 50%;
   background: rgba(0,0,0, .5);
   border-left: 4px solid rgba(255,255,255, .864);
@@ -31,11 +31,12 @@
   flex-direction: column;
 }
 
-.left{
-  order: 1;
-  background: url('road.jpg');
+.right{
+  order: 2;
   background-image:
-        linear-gradient(top, rgba(255,255,255,0.5235), rgba(255,255,255,0.46235)), url("road.jpg");
+        linear-gradient(top, rgba(255,255,255,0.5235), rgba(255,255,255,0.46235)), url("map-blue-2.jpg");
+  background: url('map-blue-2.jpg');
+
   background-position: right right;
   background-size: cover;
   background-repeat: no-repeat;
@@ -73,12 +74,12 @@
     color: #445566;
     border: 1px solid #445566;
     background: rgba(255,255,255, .7584);
-    height: 50vh;
+    height: 53vh;
     width: 40%;
     border: 1px solid white;
     border: 1px solid rgba(	68, 85, 102, .4);
     border-radius: 5px;
-    padding: 2em;
+    padding: 1.5em;
     font-family: helvetica;
     text-transform: uppercase;
     font-size: 1.5em;
@@ -98,8 +99,8 @@
   color: gray;
   border-top: 3px solid #445566;
   border-top: 3px solid #446666;
-
   padding: 1em;
+  padding-bottom: 1em;
 }
 .welcome-title{
   /*text-transform: capitalize;
@@ -107,7 +108,7 @@
   text-align: center;
   color: gray;
   border-top: 3px solid #445566;*/
-  padding: 1em;
+  padding-bottom: 1em;
   text-align: center;
 }
 
@@ -123,4 +124,17 @@
     60% { transform: rotate(5deg); }
     80% { transform: rotate(-5deg); }
     100% { transform: rotate(0deg); }
+}
+
+.start-button > a{
+  border: 1px solid #446666;
+  border-radius: 5px;
+  padding: 1em;
+  font-size: .5em;
+  color: #446666;
+}
+
+.outer-start{
+  display: flex;
+  justify-content: center;
 }

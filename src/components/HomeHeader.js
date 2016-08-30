@@ -20,6 +20,11 @@ class HomeHeader extends Component {
             Optimize your multiple stop route by
             using the Traveling Saleman Algorithm!
             </p>
+            <div className="outer-start">
+              <div className="start-button">
+                <Link to="/search">Get Started</Link>
+              </div>
+            </div>
         </div>
       </div>
     );

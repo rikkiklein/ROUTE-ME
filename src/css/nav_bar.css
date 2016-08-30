@@ -19,7 +19,7 @@ a{
   transform 2s,
   color 2s,
   border 0.15s linear;
-  font-family: Kavoon;
+  /*font-family: Kavoon;*/
   letter-spacing: .1em;
 }
 

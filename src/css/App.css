@@ -22,7 +22,7 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-a {
+/*a {
     color: white;
     text-decoration: none;
 }
@@ -31,19 +31,18 @@ a:-webkit-any-link {
     color: white;
     text-decoration: none;
     cursor: auto;
-}
-a {
+}*/
+/*a {
     text-decoration: none;
     color: white;
     -webkit-transition: width 1.5s, height 1.5s, background 2s, color 2s, border 0.15s linear, -webkit-transform 2s;
     transition: width 1.5s, height 1.5s, background 2s, color 2s, border 0.15s linear, -webkit-transform 2s;
     transition: width 1.5s, height 1.5s, background 2s, transform 2s, color 2s, border 0.15s linear;
     transition:  width 1.5s, height 1.5s, background 2s, transform 2s, color 2s, border 0.15s linear, -webkit-transform 2s;
-    font-family: Kavoon;
     letter-spacing: .1em;
+    text-transform: uppercase;
 }
 
 a:hover{
-  color: white;
-  border-bottom: 4px solid white;
-}
+  color: #ff6666;
+}*/

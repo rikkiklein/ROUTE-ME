@@ -12,13 +12,14 @@ class Header extends Component {
     return (
       <div className="header-outer">
         <div className="left">
-        </div>
-        <div className="right">
           <p>Welcome to Route Calculator!</p>
           <p>
             Optimize your multiple stop route by
             using the Traveling Saleman Algorithm!
             </p>
+        </div>
+        <div className="right">
+
         </div>
       </div>
     );
