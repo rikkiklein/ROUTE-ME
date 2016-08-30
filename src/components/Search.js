@@ -22,8 +22,8 @@ class Search extends Component {
       shortest_route: [],
       start_lat_long: "",
       end_lat_long: "",
-      mid_locationsLatLong: []
-
+      mid_locationsLatLong: [],
+      latLongs: []
     }
   }
 
@@ -62,16 +62,19 @@ class Search extends Component {
 
       //get the lat and long
       let latLongs = [];
+
       latLongs.push(this.state.start_lat_long);
-      latLongs.push(this.state.mid_locationsLatLong);
+      let midLocs = this.state.mid_locationsLatLong;
+      console.log("MIDDD LOCCC", midLocs);
+      console.log("SHORTEST PATH", this.state.shortest_route);
+      //latLongs.push(this.state.mid_locationsLatLong);
       latLongs.push(this.state.end_lat_long);
 
       console.log("LAT LONGGGG", latLongs);
+      this.setState({latLongs: latLongs})
     })
 
-
-
-  }
+}
 
   solveTSP(matrix){
     // we are planning to solve the TSP by nearest neighbor
@@ -379,8 +382,7 @@ class Search extends Component {
               </div>
             </div>
           </div>
-          <SavedRoutes rt={this.state.shortest_route}/>
-          <Footer/>
+          <SavedRoutes shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
         </div>
       </div>
     );
