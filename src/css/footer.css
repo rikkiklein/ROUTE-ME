@@ -1,5 +1,6 @@
 .footer{
   background: rgba(0,0,0,.363);
+  background: #445566;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
