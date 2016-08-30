@@ -7,6 +7,7 @@ import Footer                 from './Footer.js';
 import Header                 from './Header.js';
 import SavedRoutes            from './SavedRoutes.js';
 import { browserHistory }     from 'react-router';
+import ShortestPath           from './ShortestPath.js';
 import '../css/search.css';
 import '../css/suggest.css';
 
@@ -76,8 +77,6 @@ class Search extends Component {
       this.setState({latLongs: latLongs})
     })
   }
-
-
 
   solveTSP(matrix){
     // we are planning to solve the TSP by nearest neighbor
@@ -149,17 +148,10 @@ class Search extends Component {
 
     console.log("WE ARE DONE", shortestPath);
 
-
     this.setState({
       shortest_route: shortestPath
     })
-
   }
-
-
-
-  } //end func
-
 
   makeFullMatrix(bm, mm, me){
     let fullMatrix = [];
@@ -319,12 +311,12 @@ class Search extends Component {
 
   addMidLocation(){
       //limit the mid locations since solving TSP get's longer the more points you have
-      if(this.state.mid_locations.length < 5){
-        let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
-        let updatedLocations = this.state.mid_locations;
-        updatedLocations.push(newMidLocation)
-        this.setState({mid_locations: updatedLocations});
-      }
+    if(this.state.mid_locations.length < 5){
+      let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
+      let updatedLocations = this.state.mid_locations;
+      updatedLocations.push(newMidLocation)
+      this.setState({mid_locations: updatedLocations});
+    }
   }
 
   removeMidLocation(index){
@@ -338,6 +330,8 @@ class Search extends Component {
   }
 
   render() {
+    console.log("this.state.LL", this.state.latLongs);
+    console.log("this.state.sp", this.state.shortest_route);
     return (
       <div>
         <div>
@@ -360,23 +354,18 @@ class Search extends Component {
                     <button className="button-add search-fade-in four" onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
                     </div>
                 </form>
-                <SavedRoutes rt={this.state.shortest_route}/>
               </div>
 
               <div className="right-search">
-                right search
+                <SavedRoutes shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
               </div>
-
             </div>
 
-
-
+            <div className="shortest">
+              <ShortestPath shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
+            </div>
+          <Footer/>
           </div>
-
-            <Footer/>
-
-          <SavedRoutes shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
-
         </div>
       </div>
     );
@@ -384,3 +373,5 @@ class Search extends Component {
 }
 
 export default Search;
+
+// <SavedRoutes rt={this.state.shortest_route}/>

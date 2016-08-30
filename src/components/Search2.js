@@ -297,15 +297,12 @@ class Search extends Component {
         updatedLocations.push(newMidLocation)
         this.setState({mid_locations: updatedLocations});
       }
-
   }
 
   removeMidLocation(index){
     let mid_locations = this.state.mid_locations;
-    //remove mid-location
     mid_locations.splice(index, 1);
     let updatedMidLocations = []
-    //adjust the new ids
     for(let i = 0; i < mid_locations.length; i++){
         updatedMidLocations.push("mid-loc-"+i);
     }
