@@ -64,13 +64,9 @@ class Search extends Component {
       let latLongs = [];
 
       latLongs.push(this.state.start_lat_long);
-      let midLocs = this.state.mid_locationsLatLong;
-      console.log("MIDDD LOCCC", midLocs);
-      console.log("SHORTEST PATH", this.state.shortest_route);
-      //latLongs.push(this.state.mid_locationsLatLong);
+      latLongs.push(this.state.mid_locationsLatLong);
       latLongs.push(this.state.end_lat_long);
 
-      console.log("LAT LONGGGG", latLongs);
       this.setState({latLongs: latLongs})
     })
 

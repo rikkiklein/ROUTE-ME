@@ -17,44 +17,110 @@ class SavedRoutes extends Component {
 
   makeMap(){
     const shortestPath = this.props.shortestPath;
-
     const latLongs = this.props.locations;
-    console.log("LAAATTTTTTT LONGGGGGGSS", latLongs);
-    // let markers = latLongs.map(function(marker, index){
-    //   let latitude = marker.lat;
-    //   let longitude = marker.lng;
-    //
-    //   console.log("#marker", marker);
-    //   console.log("#lat", latitude);
-    //   console.log("#long", longitude);
-    //
+    let startLocation = [];
+    let middle_locations = [];
+    let endLocation = [];
+
+    let locations = latLongs.map(function(marker, index){
+      let name, lat, long;
+
+        if(index === 0){
+          name = shortestPath[0];
+          lat = marker.lat;
+          long = marker.lng;
+          startLocation.push({name: name, lat:lat, long:long});
+        }
+
+        //it's the middle routes need to map over them
+        if(index === 1){
+          console.log("MARKER", marker);
+          for(let prop in marker){
+            let temp = marker[prop];
+            for(let geo in temp){
+              let midLoc = [];
+              lat = temp[geo].lat;
+              long = temp[geo].lng;
+              name = geo;
+              midLoc.push({name:name, lat:lat, long:long});
+              middle_locations.push(midLoc);
+            }
+          }
+        }
+
+        if(index === 2){
+          name = shortestPath[shortestPath.length-1];
+          lat = marker.lat;
+          long = marker.lng;
+          endLocation.push({name: name, lat:lat, long:long});
+      }
+
     //   return (
     //     <Marker key={index}
     //     name={shortestPath[index]}
     //     position={{lat: latitude, lng: longitude}}/>
     //   )
-    // })
+    })
 
-//    {markers}
+    let start = startLocation.map(function(loc, index){
+      let name, lat, long;
+      name = loc.name;
+      lat = loc.lat;
+      long = loc.long;
+
+      return(
+        <Marker key={name}
+        name={name}
+        position={{lat: lat, lng: long}} />
+      )
+    })
+
+    let end = endLocation.map(function(loc, index){
+      let name, lat, long;
+      name = loc.name;
+      lat = loc.lat;
+      long = loc.long;
+
+      return(
+        <Marker key={name}
+        name={name}
+        position={{lat: lat, lng: long}} />
+      )
+    })
+
+    let middle = middle_locations.map(function(loc, index){
+      let middleMarker = [];
+      let m = loc.map(function(a, b){
+        let name, lat, long;
+        name = a.name;
+        lat = a.lat;
+        long = a.long;
+        console.log(name, lat, long);
+        return(
+          <Marker key={b}
+          name={name}
+          position={{lat: lat, lng: long}} />
+        )
+      })
+
+      middleMarker.push(m);
+
+      return(
+        middleMarker
+      )
+
+    })
+
+
 
     return(
       <Map style={{width: '100%', height: '75%'}} google={window.google}>
-
+        {start}
+        {middle}
+        {end}
       </Map>
     )
   }
-
-  makeMarkers(latLongs){
-
-    let markers = latLongs.map(function(marker, index){
-      <Marker
-      position={{lat: marker.lat, lng: marker.long}} />
-    })
-    return (
-      markers
-    )
-  }
-
 
   render() {
     const shortestPath = this.props.shortestPath;
