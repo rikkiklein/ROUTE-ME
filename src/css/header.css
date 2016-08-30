@@ -21,7 +21,7 @@
   order: 1;
   width: 50%;
   background: rgba(0,0,0, .5);
-  border-left: 4px solid rgba(255,255,255, .864);
+  border-right: 4px solid rgba(255,255,255, .864);
   color: white;
   padding: 3em;
   text-align: center;
@@ -29,33 +29,49 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  animation: 3s zoom-in-text;
 }
 
 .right{
   order: 2;
-  background-image:
-        linear-gradient(top, rgba(255,255,255,0.5235), rgba(255,255,255,0.46235)), url("map-blue-2.jpg");
-  background: url('map-blue-2.jpg');
-
-  background-position: right right;
+  width: 50%;
+  animation: 3s zoom-in-image;
+  background: url('map-blue-2.png');
+  background-position: center right;
   background-size: cover;
   background-repeat: no-repeat;
-  width: 50%;
+}
+
+@keyframes zoom-in-image {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoom-in-text  {
+  0% {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @media screen and (max-width: 450px){
-
   .header-outer{
     display: block;
-    /*position: absolute;*/
   }
-
   .right{
     width: 100%;
     border-left: 4px solid transparent;
-
   }
-
   .left{
     width: 100%;
     height: 60%;
@@ -69,8 +85,8 @@
 }
 
 .welcome-message{
-    animation: 5s welcome-message linear;
-    animation: 15s welcome-message-swing infinite;
+    animation: 5s welcome-message linear,
+              15s welcome-message-swing infinite;
     color: #445566;
     border: 1px solid #445566;
     background: rgba(255,255,255, .7584);

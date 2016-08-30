@@ -1,7 +1,7 @@
 import React, { Component }   from 'react';
 import utils                  from '../utils/helper.js'
 import { Link }               from 'react-router';
-import '../css/footer.css';
+import '../css/about.css';
 import Background             from './Background.js';
 
 class About extends Component {
@@ -11,7 +11,7 @@ class About extends Component {
       <div>
         <div className="About">
           <Background/>
-          About
+            
         </div>
       </div>
     );

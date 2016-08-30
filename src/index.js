@@ -9,10 +9,10 @@ import './css/index.css';
 
 ReactDOM.render(
   <Router history={browserHistory}>
-     <Route path="/" component={App}/>
-     <Route path="/search" component={Search}></Route>
-      <Route path="/saved-routes" component={SavedRoutes}></Route>
-     <Route path="/about" component={About}></Route>
- </Router>
+    <Route   path="/"             component={App}/>
+    <Route   path="/search"       component={Search}/>
+    <Route  path="/saved-routes"  component={SavedRoutes}/>
+    <Route   path="/about"        component={About}/>
+  </Router>
   ,document.getElementById('root')
 );

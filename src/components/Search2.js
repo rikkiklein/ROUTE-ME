@@ -7,6 +7,7 @@ import Footer                 from './Footer.js';
 import Header                 from './Header.js';
 import SavedRoutes            from './SavedRoutes.js';
 import { browserHistory }     from 'react-router';
+// import geocoder               from 'geocoder';
 import '../css/search.css';
 import '../css/suggest.css';
 
@@ -296,12 +297,15 @@ class Search extends Component {
         updatedLocations.push(newMidLocation)
         this.setState({mid_locations: updatedLocations});
       }
+
   }
 
   removeMidLocation(index){
     let mid_locations = this.state.mid_locations;
+    //remove mid-location
     mid_locations.splice(index, 1);
     let updatedMidLocations = []
+    //adjust the new ids
     for(let i = 0; i < mid_locations.length; i++){
         updatedMidLocations.push("mid-loc-"+i);
     }
@@ -314,37 +318,35 @@ class Search extends Component {
         <div>
           <Header/>
           <NavBar/>
-          <div className="search-fade">
-            <div className="flex-search">
-              <div className="left-search">
-                <form onSubmit={(event)=>this.getDistance(event)}>
-                  <GeoSuggest className="input search-fade" onSuggestSelect={this.changeStartLoc.bind(this)} placeholder="start location..."/>
-                  {this.state.mid_locations.map((mid_loc, index) =>
-                    <div id="additional" key={mid_loc}>
-                      <AdditionalLocation ref={mid_loc} locKey={mid_loc} key={mid_loc} />
-                      <button className="button-del" type="button" onClick={(event) => this.removeMidLocation(index)}>X</button>
-                    </div>
-                  )}
-                  <GeoSuggest className="input search-fade" onSuggestSelect={this.changeEndLoc.bind(this)} placeholder="end location..." />
-                  <div className="but-area">
-                    <button className="button-add search-fade-in three" onClick={(event) => this.addMidLocation()}>Add Waypoint</button>
-                    <button className="button-add search-fade-in four" onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
-                    </div>
-                </form>
-                <SavedRoutes rt={this.state.shortest_route}/>
-              </div>
+          <div className="middle-outer-outer-search">
+            <div className="middle-outer-search">
+              <div className="middle-search">
+                <div className="header">
+                  <h5>Fill out your start, middle and end locations!</h5>
+                </div>
 
-              <div className="right-search">
-                right search
-              </div>
+                <div className="mid-form">
+                  <form onSubmit={(event)=>this.getDistance(event)}>
+                    <GeoSuggest className="input" onSuggestSelect={this.changeStartLoc.bind(this)} placeholder="start location..."/>
+                    {this.state.mid_locations.map((mid_loc, index) =>
+                      <div id="additional" key={mid_loc}>
+                        <AdditionalLocation ref={mid_loc} locKey={mid_loc} key={mid_loc} />
+                        <button className="button-del" type="button" onClick={(event) => this.removeMidLocation(index)}>X</button>
+                      </div>
+                    )}
+                    <GeoSuggest className="input" onSuggestSelect={this.changeEndLoc.bind(this)} placeholder="end location..." />
+                  </form>
+                </div>
 
+                <div className="but-area">
+                  <button className="button" onClick={(event) => this.addMidLocation()}>Add Waypoint</button>
+                  <button className="button" onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
+                </div>
+              </div>
             </div>
-
-
-
           </div>
-
-            <Footer/>
+          <SavedRoutes rt={this.state.shortest_route}/>
+          <Footer/>
         </div>
       </div>
     );

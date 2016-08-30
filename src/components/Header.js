@@ -15,7 +15,7 @@ class Header extends Component {
           <p>Welcome to Route Calculator!</p>
           <p>
             Optimize your multiple stop route by
-            using the Traveling Saleman Algorithm!
+            using the Traveling Salesman Algorithm!
             </p>
         </div>
         <div className="right">
