@@ -1,12 +1,15 @@
 import React, {Component}   from 'react';
 import {browserHistory}     from 'react-router';
+import Model                from './NameModal.js'
 
 class Directions extends Component {
 
 
   constructor(props){
     super(props);
-
+    this.state = {
+      clicked: false
+    }
   }
 
   makeDirections(){
@@ -34,26 +37,30 @@ class Directions extends Component {
       }
 
     }
+
     console.log("dirToRender", dirToRender);
+
     return (
       <div dangerouslySetInnerHTML ={{__html: dirToRender}}/>
     )
   }
 
   createRouteToSave(event){
-    event.preventDefault();
-    browserHistory.push("/addName");
+    this.setState({clicked: true})
+
   }
 
   render() {
     let directions = this.props.directions;
     let length = directions.length;
     let sp = this.props.shortestPath
-    console.log("SP", sp);
+    let clicked = this.state.clicked;
+
     return (
       <div>
         {length > 0 ? this.makeDirections(): ""}
         <button onClick={(event)=> this.createRouteToSave(event)}>Save Route</button>
+        {clicked ? <Model sp={sp}/> : ""}
       </div>
     );
   }
