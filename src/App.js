@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link }             from 'react-router';
 import Background           from "./components/Background.js";
-import './css/App.css';
 import Home                 from "./components/Home.js";
+import './css/App.css';
 
 class App extends Component {
-
   render() {
     return (
       <div>
@@ -16,4 +15,3 @@ class App extends Component {
 }
 
 export default App;
-// <Background/>

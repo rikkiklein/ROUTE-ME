@@ -114,7 +114,7 @@ class SavedRoutes extends Component {
     })
 
     return(
-      <Map style={{width: '100%', height: '75%', position: 'absolute'}} google={window.google}>
+      <Map className="mapStyles" google={window.google}>
         {start}
         {middle}
         {end}
@@ -140,6 +140,7 @@ class SavedRoutes extends Component {
     const dLength = directions.length;
     return (
       <div>
+
         {shortestPath.map((item, index)=>{
           return(
             <div key={index}>{item}</div>
@@ -147,9 +148,11 @@ class SavedRoutes extends Component {
         })}
         {length > 0 ?
           <button onClick={(event)=>this.viewDirections()}>View Directions</button> : ""}
-        {length > 0 ?
-          this.makeMap() : ""}
+
         {dLength > 0 ? <Directions directions={directions} /> : "" }
+
+        {length > 0 ? this.makeMap() : ""}
+
       </div>
     );
   }

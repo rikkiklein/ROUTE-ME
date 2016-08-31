@@ -1,18 +1,29 @@
 import React, { Component }   from 'react';
 import utils                  from '../utils/helper.js'
 import { Link }               from 'react-router';
-import '../css/footer.css';
-import Background             from './Background.js';
+import NavBar                 from './NavBar.js';
+import Footer                 from './Footer.js';
+import Header                 from './Header.js';
+
+import '../css/header.css';
 
 class About extends Component {
 
   render() {
     return (
       <div>
-        <div className="About">
-          <Background/>
-          About
+        <div className="header-outer">
+          <div className="left-about">
+
+          </div>
+          <div className="right-about">
+            <p>Welcome to Route Calculator!</p>
+            <p>
+              About Us!
+              </p>
+          </div>
         </div>
+         <NavBar/>
       </div>
     );
   }
@@ -20,3 +31,5 @@ class About extends Component {
 }
 
 export default About;
+
+// <div className="button"><Link to="/search">Get Started!</Link></div>
