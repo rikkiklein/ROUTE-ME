@@ -108,8 +108,9 @@ form{
   border-right: 1px solid #445566;
 }
 
-.mapStyle{
+.mapStyles{
   height: 60vh;
+  border: 3px solid purple;
 }
 
 input{

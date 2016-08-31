@@ -8,6 +8,8 @@ import Header                 from './Header.js';
 import SavedRoutes            from './SavedRoutes.js';
 import { browserHistory }     from 'react-router';
 import ShortestPath           from './ShortestPath.js';
+import index                  from './index.js';
+
 import '../css/search.css';
 import '../css/suggest.css';
 
@@ -52,13 +54,11 @@ class Search extends Component {
       let bm = this.makeMatrixBM(res.data.BM);
       let mm = this.makeMatrixMM(res.data.MM);
       let gmMid_locations = [];
-
       for(let i = 0; i < mm.length; i++){
         if(!gmMid_locations.includes(mm[i].origin)){
           gmMid_locations.push(mm[i].origin);
         }
       }
-
       this.setState({gm_locations: gmMid_locations});
       let me = this.makeMatrixME(res.data.ME);
       this.makeFullMatrix(bm, mm, me);
@@ -72,7 +72,8 @@ class Search extends Component {
 
       this.setState({latLongs: latLongs})
     })
-  }
+
+}
 
   solveTSP(matrix){
     // we are planning to solve the TSP by nearest neighbor
@@ -111,7 +112,7 @@ class Search extends Component {
           console.log("they are equal!");
           originArray.push(middleMatrix[i]);
         }
-      }
+      } //end for loop
 
       let originMinDistance = originArray[0].distance;
       let originMinName     = originArray[0].destination;
@@ -136,21 +137,23 @@ class Search extends Component {
         gm_locations.splice(index, 1);
       }
     }
-
+    console.log("GM LOCATIONS", gm_locations);
     if(gm_locations.length !== 0){
         shortestPath[shortestPath.length-1] = gm_locations.pop();
     }
     shortestPath.push(this.state.end);
-
     console.log("WE ARE DONE", shortestPath);
 
     this.setState({
       shortest_route: shortestPath
     })
-  }
+
+
+  } //end func
 
   makeFullMatrix(bm, mm, me){
     let fullMatrix = [];
+
     fullMatrix.push(bm);
     fullMatrix.push(mm);
     fullMatrix.push(me);
@@ -167,7 +170,12 @@ class Search extends Component {
     // for(let i = 0; i < me.length; i++){
     //   fullMatrix.push(me[i]);
     // }
+
+    console.log("full matrix", fullMatrix);
+
+    //solve TSP
     this.solveTSP(fullMatrix);
+
   }
 
   makeMatrixBM(data){
@@ -203,6 +211,7 @@ class Search extends Component {
   } //end of function
 
   makeMatrixMM(data){
+    console.log("mm is", data);
     let arrayToPush = [];
     for(let i = 0; i < data.destination_addresses.length; i++){
       for(let j = 0; j < data.origin_addresses.length;j++)
@@ -213,8 +222,10 @@ class Search extends Component {
       if(prop === "destination_addresses"){
         let len = data[prop].length;
         let count = 0;
+        console.log("len is", len);
         let limit = len * len;
           for(let d = 0; d < limit; d+=len){
+            console.log("d is", d);
             let upperBound = d + len;
             count = 0;
             for(let k = d; k < upperBound; k++){
@@ -226,8 +237,10 @@ class Search extends Component {
       if(prop === "origin_addresses"){
         let len = data[prop].length;
         let count = -1;
+        console.log("len is", len);
         let limit = len * len;
           for(let d = 0; d < limit; d+=len){
+            console.log("d is", d);
             let upperBound = d + len;
             count++;
             for(let k = d; k < upperBound; k++){
@@ -237,9 +250,12 @@ class Search extends Component {
       }
 
       if(prop === "rows"){
+        console.log("rows prop", data[prop]);
         let len = data[prop].length;
         let index = 0;
-
+        // let count = -1;
+        console.log("len is", len);
+        //looping thru outer rows
         for(let i = 0; i < len; i++){
           //loop thru elements
           for(let j = 0; j<data[prop][i].elements.length; j++){
@@ -256,12 +272,16 @@ class Search extends Component {
             arrayToPush.splice(i, 1);
           }
         }
+
       }
+
+
+
     }
     //only need half of the results because A-B and B-A are the same thing, we don't need both since they are associative
     // let halfLength = Math.floor(arrayToPush.length / 2);
     // let upperHalf = arrayToPush.splice(0, halfLength);
-
+    //
     // console.log("array to push in mm", arrayToPush);
     // console.log("half of the array", upperHalf);
     return arrayToPush;
@@ -307,18 +327,21 @@ class Search extends Component {
 
   addMidLocation(){
       //limit the mid locations since solving TSP get's longer the more points you have
-    if(this.state.mid_locations.length < 5){
-      let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
-      let updatedLocations = this.state.mid_locations;
-      updatedLocations.push(newMidLocation)
-      this.setState({mid_locations: updatedLocations});
-    }
+      if(this.state.mid_locations.length < 5){
+        let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
+        let updatedLocations = this.state.mid_locations;
+        updatedLocations.push(newMidLocation)
+        this.setState({mid_locations: updatedLocations});
+      }
+
   }
 
   removeMidLocation(index){
     let mid_locations = this.state.mid_locations;
+    //remove mid-location
     mid_locations.splice(index, 1);
     let updatedMidLocations = []
+    //adjust the new ids
     for(let i = 0; i < mid_locations.length; i++){
         updatedMidLocations.push("mid-loc-"+i);
     }
@@ -326,8 +349,6 @@ class Search extends Component {
   }
 
   render() {
-    console.log("this.state.LL", this.state.latLongs);
-    console.log("this.state.sp", this.state.shortest_route);
     return (
       <div>
         <div>
@@ -369,5 +390,3 @@ class Search extends Component {
 }
 
 export default Search;
-
-// <SavedRoutes rt={this.state.shortest_route}/>

@@ -7,7 +7,7 @@ import Footer                 from './Footer.js';
 import Header                 from './Header.js';
 import SavedRoutes            from './SavedRoutes.js';
 import { browserHistory }     from 'react-router';
-// import geocoder               from 'geocoder';
+import ShortestPath           from './ShortestPath.js';
 import '../css/search.css';
 import '../css/suggest.css';
 
@@ -20,7 +20,11 @@ class Search extends Component {
       end: "",
       mid_locations: [],
       gm_locations: [],
-      shortest_route: []
+      shortest_route: [],
+      start_lat_long: "",
+      end_lat_long: "",
+      mid_locationsLatLong: [],
+      latLongs: []
     }
   }
 
@@ -29,10 +33,14 @@ class Search extends Component {
     let start = this.state.start;
     let end = this.state.end;
     let midLocations = []
-
+    let latLong = []
     for(let prop in this.refs){
       midLocations.push(this.refs[prop].state.location);
+      let key = this.refs[prop].state.location;
+      latLong.push({[key]: this.refs[prop].state.latlong })
     }
+
+    this.setState({mid_locationsLatLong: latLong});
 
     let data = {
       start: start,
@@ -54,6 +62,15 @@ class Search extends Component {
       this.setState({gm_locations: gmMid_locations});
       let me = this.makeMatrixME(res.data.ME);
       this.makeFullMatrix(bm, mm, me);
+
+      //get the lat and long
+      let latLongs = [];
+
+      latLongs.push(this.state.start_lat_long);
+      latLongs.push(this.state.mid_locationsLatLong);
+      latLongs.push(this.state.end_lat_long);
+
+      this.setState({latLongs: latLongs})
     })
   }
 
@@ -126,7 +143,6 @@ class Search extends Component {
     shortestPath.push(this.state.end);
 
     console.log("WE ARE DONE", shortestPath);
-
 
     this.setState({
       shortest_route: shortestPath
@@ -281,22 +297,22 @@ class Search extends Component {
   } //end of function
 
   changeStartLoc(input){
-    this.setState({start: input.label })
+    this.setState({start: input.label, start_lat_long: input.location })
   }
 
   changeEndLoc(input){
-    this.setState({end: input.label })
+    this.setState({end: input.label, end_lat_long: input.location })
   }
   // <div dangerouslySetInnerHTML ={{__html: 'Head \u003cb\u003esoutheast\u003c/b\u003e on \u003cb\u003eW 16th St\u003c/b\u003e toward \u003cb\u003eNinth Ave\u003c/b\u003e'}}/>
 
   addMidLocation(){
       //limit the mid locations since solving TSP get's longer the more points you have
-      if(this.state.mid_locations.length < 5){
-        let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
-        let updatedLocations = this.state.mid_locations;
-        updatedLocations.push(newMidLocation)
-        this.setState({mid_locations: updatedLocations});
-      }
+    if(this.state.mid_locations.length < 5){
+      let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
+      let updatedLocations = this.state.mid_locations;
+      updatedLocations.push(newMidLocation)
+      this.setState({mid_locations: updatedLocations});
+    }
   }
 
   removeMidLocation(index){
@@ -310,40 +326,42 @@ class Search extends Component {
   }
 
   render() {
+    console.log("this.state.LL", this.state.latLongs);
+    console.log("this.state.sp", this.state.shortest_route);
     return (
       <div>
         <div>
           <Header/>
           <NavBar/>
-          <div className="middle-outer-outer-search">
-            <div className="middle-outer-search">
-              <div className="middle-search">
-                <div className="header">
-                  <h5>Fill out your start, middle and end locations!</h5>
-                </div>
+          <div className="search-fade">
+            <div className="flex-search">
+              <div className="left-search">
+                <form onSubmit={(event)=>this.getDistance(event)}>
+                  <GeoSuggest className="input search-fade" onSuggestSelect={this.changeStartLoc.bind(this)} placeholder="start location..."/>
+                  {this.state.mid_locations.map((mid_loc, index) =>
+                    <div id="additional" key={mid_loc}>
+                      <AdditionalLocation ref={mid_loc} locKey={mid_loc} key={mid_loc} />
+                      <button className="button-del" type="button" onClick={(event) => this.removeMidLocation(index)}>X</button>
+                    </div>
+                  )}
+                  <GeoSuggest className="input search-fade" onSuggestSelect={this.changeEndLoc.bind(this)} placeholder="end location..." />
+                  <div className="but-area">
+                    <button className="button-add search-fade-in three" onClick={(event) => this.addMidLocation()}>Add Waypoint</button>
+                    <button className="button-add search-fade-in four" onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
+                    </div>
+                </form>
+              </div>
 
-                <div className="mid-form">
-                  <form onSubmit={(event)=>this.getDistance(event)}>
-                    <GeoSuggest className="input" onSuggestSelect={this.changeStartLoc.bind(this)} placeholder="start location..."/>
-                    {this.state.mid_locations.map((mid_loc, index) =>
-                      <div id="additional" key={mid_loc}>
-                        <AdditionalLocation ref={mid_loc} locKey={mid_loc} key={mid_loc} />
-                        <button className="button-del" type="button" onClick={(event) => this.removeMidLocation(index)}>X</button>
-                      </div>
-                    )}
-                    <GeoSuggest className="input" onSuggestSelect={this.changeEndLoc.bind(this)} placeholder="end location..." />
-                  </form>
-                </div>
-
-                <div className="but-area">
-                  <button className="button" onClick={(event) => this.addMidLocation()}>Add Waypoint</button>
-                  <button className="button" onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
-                </div>
+              <div className="right-search">
+                <SavedRoutes shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
               </div>
             </div>
-          </div>
-          <SavedRoutes rt={this.state.shortest_route}/>
+
+            <div className="shortest">
+              <ShortestPath shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
+            </div>
           <Footer/>
+          </div>
         </div>
       </div>
     );
@@ -351,3 +369,5 @@ class Search extends Component {
 }
 
 export default Search;
+
+// <SavedRoutes rt={this.state.shortest_route}/>
