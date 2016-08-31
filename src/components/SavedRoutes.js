@@ -4,7 +4,6 @@ import { Link }                        from 'react-router';
 import '../css/footer.css';
 import '../css/search.css';
 import Background                      from './Background.js';
-
 import {Map, Marker, InfoWindow}       from 'google-maps-react';
 
 
@@ -111,8 +110,6 @@ class SavedRoutes extends Component {
 
     })
 
-
-
     return(
       <Map style={{width: '100%', height: '75%'}} google={window.google}>
         {start}
@@ -120,6 +117,16 @@ class SavedRoutes extends Component {
         {end}
       </Map>
     )
+  }
+
+  viewDirections(){
+    let data = {
+      route: this.props.shortestPath
+    }
+
+    utils.getDirections(data).then((res) => {
+      console.log("res", res.data);
+    })
   }
 
   render() {
@@ -133,7 +140,11 @@ class SavedRoutes extends Component {
             <div key={index}>{item}</div>
           )
         })}
-            {length > 0 ? this.makeMap() : ""}
+        {length > 0 ?
+          <button onClick={(event)=>this.viewDirections()}>View Directions</button> : ""}
+        {length > 0 ?
+          this.makeMap() : ""}
+
       </div>
     );
   }
