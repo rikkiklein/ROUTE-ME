@@ -4,15 +4,17 @@ import { Link }                        from 'react-router';
 import '../css/footer.css';
 import '../css/search.css';
 import Background                      from './Background.js';
-
 import {Map, Marker, InfoWindow}       from 'google-maps-react';
-
+import Directions                      from './Directions.js';
 
 class SavedRoutes extends Component {
 
 
   constructor(props){
     super(props);
+    this.state = {
+      directions: ""
+    }
   }
 
   makeMap(){
@@ -111,8 +113,6 @@ class SavedRoutes extends Component {
 
     })
 
-
-
     return(
       <Map className="mapStyles" google={window.google}>
         {start}
@@ -122,13 +122,37 @@ class SavedRoutes extends Component {
     )
   }
 
+  viewDirections(){
+    let data = {
+      route: this.props.shortestPath
+    }
+
+    utils.getDirections(data).then((res) => {
+      console.log("res", res.data.routes[0].legs);
+      this.setState({directions: res.data.routes[0].legs})
+    })
+  }
+
   render() {
     const shortestPath = this.props.shortestPath;
     const length = shortestPath.length;
-
+    const directions = this.state.directions;
+    const dLength = directions.length;
     return (
       <div>
+
+        {shortestPath.map((item, index)=>{
+          return(
+            <div key={index}>{item}</div>
+          )
+        })}
+        {length > 0 ?
+          <button onClick={(event)=>this.viewDirections()}>View Directions</button> : ""}
+
+        {dLength > 0 ? <Directions directions={directions} /> : "" }
+
         {length > 0 ? this.makeMap() : ""}
+
       </div>
     );
   }
