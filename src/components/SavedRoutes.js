@@ -58,12 +58,14 @@ class SavedRoutes extends Component {
           endLocation.push({name: name, lat:lat, long:long});
       }
 
+
     //   return (
     //     <Marker key={index}
     //     name={shortestPath[index]}
     //     position={{lat: latitude, lng: longitude}}/>
     //   )
     })
+
 
     let start = startLocation.map(function(loc, index){
       let name, lat, long;
@@ -113,9 +115,31 @@ class SavedRoutes extends Component {
       )
 
     })
+    let startLat = "";
+    let startLong = "";
+
+    // console.log('#',startLat, startLong);
+    console.log('#',this.props.locations);
+    console.log('#',this.props.locations[0]);
+    let lox = this.props.locations[0];
+    console.log("LOX", lox);
+    for(let l in lox){
+      console.log("$", lox[l]);
+      if(l === "lat"){
+        startLat = lox[l];
+      }
+      if(l === "lng"){
+        startLong = lox[l]
+      }
+    }
+
+    console.log("start lat finally", startLat);
+    console.log("start long finally", startLong);
 
     return(
-      <Map className="mapStyles" google={window.google}>
+      <Map className="mapStyles2" center={{lat: startLat, lng: startLong}} zoom={9}
+
+         style={{border: '10px solid red', position: 'static', width: '100%', height: '100%'}}  google={window.google}>
         {start}
         {middle}
         {end}
@@ -144,12 +168,6 @@ class SavedRoutes extends Component {
     const dLength = directions.length;
     return (
       <div>
-
-        {shortestPath.map((item, index)=>{
-          return(
-            <div key={index}>{item}</div>
-          )
-        })}
         {length > 0 ?
           <button onClick={(event)=>this.viewDirections()}>View Directions</button> : ""}
 
@@ -166,3 +184,30 @@ class SavedRoutes extends Component {
 }
 
 export default SavedRoutes;
+
+// style={{width: "40%"}}
+// //   container: {
+//     position: 'absolute',
+//     width: '100%',
+//     height: '100%'
+//   },
+//   map: {
+//     position: 'absolute',
+//     left: 0,
+//     right: 0,
+//     bottom: 0,
+//     top: 0
+//   }
+//
+// Map.defaultProps = {
+//   zoom: 14,
+//   initialCenter: {
+//     lat: 37.774929,
+//     lng: -122.419416
+//   },
+//   center: {},
+//   centerAroundCurrentLocation: false,
+//   style: {},
+//   containerStyle: {},
+//   visible: true
+// };

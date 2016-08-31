@@ -12,6 +12,8 @@ class About extends Component {
   render() {
     return (
       <div>
+        <NavBar/>
+
         <div className="header-outer">
           <div className="left-about">
 
@@ -23,7 +25,7 @@ class About extends Component {
               </p>
           </div>
         </div>
-         <NavBar/>
+        <Header/>
       </div>
     );
   }
