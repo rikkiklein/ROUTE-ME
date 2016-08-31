@@ -7,6 +7,7 @@ import Background                      from './Background.js';
 import {Map, Marker, InfoWindow}       from 'google-maps-react';
 import Directions                      from './Directions.js';
 
+
 class SavedRoutes extends Component {
 
 
@@ -131,7 +132,10 @@ class SavedRoutes extends Component {
       console.log("res", res.data.routes[0].legs);
       this.setState({directions: res.data.routes[0].legs})
     })
+
+
   }
+
 
   render() {
     const shortestPath = this.props.shortestPath;
@@ -149,9 +153,11 @@ class SavedRoutes extends Component {
         {length > 0 ?
           <button onClick={(event)=>this.viewDirections()}>View Directions</button> : ""}
 
-        {dLength > 0 ? <Directions directions={directions} /> : "" }
+        {dLength > 0 ? <Directions directions={directions} shortestPath={shortestPath} /> : "" }
 
         {length > 0 ? this.makeMap() : ""}
+
+
 
       </div>
     );

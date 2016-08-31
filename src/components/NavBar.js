@@ -18,9 +18,9 @@ class NavBar extends Component {
             <span className="hideGlyph"><Glyphicon glyph="search"/></span>
             <span className="hideText">Search</span></Link>
           </div>
-          <div className="nav-div"><Link to="/saved-routes">
+          <div className="nav-div"><Link to="/view-routes">
             <span className="hideGlyph"><Glyphicon glyph="map-marker"/></span>
-            <span className="hideText">Saved Routes</span></Link>
+            <span className="hideText">My Saved Routes</span></Link>
           </div>
           <div className="nav-div"><Link to="/about">
             <span className="hideGlyph"><Glyphicon glyph="info-sign"/></span>

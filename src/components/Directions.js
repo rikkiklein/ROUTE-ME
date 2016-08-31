@@ -1,5 +1,5 @@
 import React, {Component}   from 'react';
-
+import {browserHistory}     from 'react-router';
 
 class Directions extends Component {
 
@@ -32,20 +32,28 @@ class Directions extends Component {
           //dirToRender.push(steps)
         }
       }
-    }
 
+    }
     console.log("dirToRender", dirToRender);
     return (
       <div dangerouslySetInnerHTML ={{__html: dirToRender}}/>
     )
   }
 
+  createRouteToSave(event){
+    event.preventDefault();
+    browserHistory.push("/addName");
+  }
+
   render() {
     let directions = this.props.directions;
     let length = directions.length;
+    let sp = this.props.shortestPath
+    console.log("SP", sp);
     return (
       <div>
         {length > 0 ? this.makeDirections(): ""}
+        <button onClick={(event)=> this.createRouteToSave(event)}>Save Route</button>
       </div>
     );
   }
