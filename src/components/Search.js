@@ -381,7 +381,6 @@ class Search extends Component {
             <div className="shortest">
               <ShortestPath shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
             </div>
-          <Footer/>
           </div>
         </div>
       </div>

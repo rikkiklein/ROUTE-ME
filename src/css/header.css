@@ -59,7 +59,7 @@
   width: 50%;
   background: rgba(0,0,0, .5);
   background: #445566;
-  border-right: 4px solid rgba(255,255,255, .864);
+  border-left: 4px solid rgba(255,255,255, .864);
   color: white;
   padding: 3em;
   text-align: center;
