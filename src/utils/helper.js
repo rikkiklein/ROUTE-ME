@@ -10,6 +10,9 @@ export default {
   },
   getAllRoutes: function(){
     return axios.get('http://localhost:3000/saved-routes')
+  },
+  saveRoutes: function(data){
+    return axios.post('http://localhost:3000/saved-routes/new', data)
   }
 
 }
