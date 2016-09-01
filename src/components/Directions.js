@@ -32,7 +32,6 @@ class Directions extends Component {
               dirToRender += step.html_instructions;
           });
 
-          //dirToRender.push(steps)
         }
       }
 
