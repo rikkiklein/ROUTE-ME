@@ -1,11 +1,9 @@
-import React, {Component}   from 'react';
-import utils                           from '../utils/helper.js'
-import { Link }                        from 'react-router';
-import '../css/footer.css';
-import '../css/search.css';
-import Background                      from './Background.js';
-import {Map, Marker, InfoWindow}       from 'google-maps-react';
-import Directions                      from './Directions.js';
+import React, {Component}         from 'react';
+import utils                      from '../utils/helper.js'
+import { Link }                   from 'react-router';
+import Background                 from './Background.js';
+import {Map, Marker, InfoWindow}  from 'google-maps-react';
+import Directions                 from './Directions.js';
 
 
 class SavedRoutes extends Component {
@@ -117,14 +115,8 @@ class SavedRoutes extends Component {
     })
     let startLat = "";
     let startLong = "";
-
-    // console.log('#',startLat, startLong);
-    console.log('#',this.props.locations);
-    console.log('#',this.props.locations[0]);
     let lox = this.props.locations[0];
-    console.log("LOX", lox);
     for(let l in lox){
-      console.log("$", lox[l]);
       if(l === "lat"){
         startLat = lox[l];
       }
@@ -133,19 +125,19 @@ class SavedRoutes extends Component {
       }
     }
 
-    console.log("start lat finally", startLat);
-    console.log("start long finally", startLong);
-
     return(
-      <Map className="mapStyles2" center={{lat: startLat, lng: startLong}} zoom={9}
-
-         style={{border: '10px solid red', position: 'static', width: '100%', height: '100%'}}  google={window.google}>
-        {start}
-        {middle}
-        {end}
-      </Map>
+        <Map center={{lat: startLat, lng: startLong}} zoom={9}
+          containerStyle={
+           {width: '65%', height: '60%'}}
+           style={
+              { border: '1px solid lightblue'}} google={window.google}>
+             {start}
+             {middle}
+             {end}
+        </Map>
     )
   }
+
 
   viewDirections(){
     let data = {
@@ -156,10 +148,7 @@ class SavedRoutes extends Component {
       console.log("res", res.data.routes[0].legs);
       this.setState({directions: res.data.routes[0].legs})
     })
-
-
   }
-
 
   render() {
     const shortestPath = this.props.shortestPath;

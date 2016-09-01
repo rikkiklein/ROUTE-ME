@@ -11,4 +11,8 @@
   color: white;
   font-size: .6em;
   padding: 1em;
+  position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }

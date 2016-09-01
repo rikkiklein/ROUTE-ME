@@ -335,7 +335,6 @@ class Search extends Component {
       }
 
       if(this.state.mid_locations.length >= 10){
-        //make button disabled and add class styling to button
         let addButton = document.getElementById('add-way-point');
         addButton.classList.add("disabled");
       }

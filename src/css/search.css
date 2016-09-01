@@ -100,16 +100,14 @@ form{
 }
 
 .right-search{
-  width: 70%;
+  background: #fcfcf6;
+  min-height: 60vh;
+  justify-content: center;
+  display: flex;
 }
 
 .left-search{
-  width: 30%;
-  border-right: 1px solid #445566;
-}
-
-.mapStyles2{
-  border: 3px solid purple;
+  width: 35%;
 }
 
 input{
@@ -120,4 +118,12 @@ input{
 
 .disabled{
   background: purple;
+}
+
+#mapContainer{
+  border: 40px solid blue;
+}
+
+.directions-button{
+  background: orange;
 }
