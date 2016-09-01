@@ -327,11 +327,17 @@ class Search extends Component {
 
   addMidLocation(){
       //limit the mid locations since solving TSP get's longer the more points you have
-      if(this.state.mid_locations.length < 5){
+      if(this.state.mid_locations.length < 10){
         let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
         let updatedLocations = this.state.mid_locations;
         updatedLocations.push(newMidLocation)
         this.setState({mid_locations: updatedLocations});
+      }
+
+      if(this.state.mid_locations.length >= 10){
+        //make button disabled and add class styling to button
+        let addButton = document.getElementById('add-way-point');
+        addButton.classList.add("disabled");
       }
 
   }
@@ -367,7 +373,7 @@ class Search extends Component {
                   )}
                   <GeoSuggest className="input search-fade" onSuggestSelect={this.changeEndLoc.bind(this)} placeholder="end location..." />
                   <div className="but-area">
-                    <button className="button-add search-fade-in three" onClick={(event) => this.addMidLocation()}>Add Waypoint</button>
+                    <button className="button-add search-fade-in three" id="add-way-point" onClick={(event) => this.addMidLocation()}>Add Waypoint</button>
                     <button className="button-add search-fade-in four" onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
                     </div>
                 </form>
