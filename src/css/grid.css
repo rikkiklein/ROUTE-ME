@@ -1,0 +1,70 @@
+.flexGrid{
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.grid-outer{
+  display: flex;
+  justify-content: center;
+  background: rgba(250, 250, 255, .5748);
+}
+
+.grid{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  padding: 1em;
+  padding-top: 2em;
+  width: 100%;
+}
+
+.box{
+  animation: 3s zoom-in-text;
+  min-height: 35vh;
+  padding: 2em;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-width: 30%;
+  margin: 1%;
+  border: 1px solid #443355;
+  border: 1px solid #ADD8E6;
+  border-radius: 5px;
+  background: #FCFCFC;
+}
+
+.del-button{
+  border: 1px solid #446666;
+  border-radius: 5px;
+  padding: 1em;
+  font-size: .8em;
+  color: #446666;
+  background: transparent;
+}
+
+.item-name{
+  text-transform: uppercase;
+  border-bottom: 3px solid #665544;
+  width: 100%;
+  padding-bottom: .5em;
+}
+
+.item-path{
+  padding-top: 1em;
+  padding-bottom: .5em;
+}
+
+.single-item-path{
+  margin: 2%;
+  padding: .5em;
+}
+
+.counter{
+  font-weight: bold;
+  color: 	#664455;
+
+}

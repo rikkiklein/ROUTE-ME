@@ -7,6 +7,7 @@ import HeaderAbout            from './HeaderAbout.js';
 import HomeHeaderAbout        from './HomeHeaderAbout.js';
 import '../css/header.css';
 import '../css/about.css';
+import '../css/grid.css';
 
 class Grid extends Component {
 
@@ -15,21 +16,7 @@ class Grid extends Component {
       <div>
         <div className="flexGrid">
           <div className="colAFlex">
-            <div className="rowAFlex"></div>
-            <div className="rowBFlex"></div>
-            <div className="rowCFlex">  </div>
-          </div>
-
-          <div className="colBFlex">
-            <div className="rowAFlex"></div>
-            <div className="rowBFlex">hi</div>
-            <div className="rowCFlex"></div>
-          </div>
-
-          <div className="colBFlex">
-            <div className="rowAFlex"></div>
-            <div className="rowBFlex"></div>
-            <div className="rowCFlex"></div>
+            <div className="rowFlex">{this.props.gridPath}</div>
           </div>
         </div>
       </div>
