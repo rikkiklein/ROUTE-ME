@@ -2,6 +2,7 @@ import React, {Component}       from 'react';
 import utils                    from '../utils/helper.js'
 import NavBar                   from './NavBar.js';
 import Header                   from './Header.js';
+import Footer                   from './Footer.js';
 import '../css/footer.css';
 import '../css/search.css';
 import '../css/grid.css';
@@ -23,10 +24,8 @@ class ViewRoutes extends Component {
   }
 
   showRoutes(){
-
     let results;
     utils.getAllRoutes().then((res) => {
-
       this.setState({
         results: res.data
       })
@@ -46,22 +45,26 @@ class ViewRoutes extends Component {
           )
         })
         return (
-        <div key={index}>
-          <div className="box">
+        <div className="box" key={index}>
             <div className="item-name">
               {item.name}
             </div>
             <div className="item-path">
-              {path}
+              {
+                path.map((item, index)=>{
+                return(<div>
+                        <div className="counter">Stop: #{index+1}</div>
+                        <div className="single-item-path">{item.props.children}</div>
+                      </div>
+                    )
+                })
+            }
             </div>
-            <button onClick={(event)=>this.deleteRoute(name)}>Delete Route</button>
-          </div>
+            <button className="del-button" onClick={(event)=>this.deleteRoute(name)}>Delete Route</button>
         </div>
         )
       })
-
     }
-
     return (r)
   }
 
@@ -78,6 +81,8 @@ class ViewRoutes extends Component {
               {this.showRoutes()}
           </div>
         </div>
+
+        <Footer/>
       </div>
     )
   }

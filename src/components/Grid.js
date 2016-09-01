@@ -12,7 +12,6 @@ import '../css/grid.css';
 class Grid extends Component {
 
   render() {
-    console.log("this.props.gridRoute", this.props.gridPath);
     return (
       <div>
         <div className="flexGrid">
