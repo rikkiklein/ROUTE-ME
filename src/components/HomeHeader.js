@@ -11,7 +11,7 @@ class HomeHeader extends Component {
 
   render() {
     return (
-      <div className="home-header-outer">
+      <div className="home-header-outer-left">
         <div className="welcome-message">
           <div className="welcome-title">
             Welcome to Route Calculator

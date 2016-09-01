@@ -1,4 +1,26 @@
+.outer-div{
+  display: flex;
+  flex-direction: column;
+  background: url('map.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 1em;
+  justify-content: center;
+}
+
+.outer-TSP{
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
 .header-outer{
+  display: flex;
+  flex-direction: row;
+  height: 50vh;
+}
+
+.header-outer-about{
   display: flex;
   flex-direction: row;
   height: 50vh;
@@ -7,14 +29,23 @@
 .home-header-outer{
   display: flex;
   flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3em;
+}
+
+.home-header-outer-left{
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   background: url('map.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 5em;
+  padding-left: 7em;
 }
 
 .left{
@@ -22,7 +53,6 @@
   width: 50%;
   background: rgba(0,0,0, .5);
   background: #445566;
-
   border-right: 4px solid rgba(255,255,255, .864);
   color: white;
   padding: 3em;
@@ -45,13 +75,14 @@
 }
 
 .left-about{
-  order: 2;
+  order: 1;
   width: 50%;
   animation: 3s zoom-in-image;
-  background: url('map-green.png');
-  background-position: center right;
-  background-size: cover;
+  background: url('austin.jpg');
+  background-position: contain;
+  background-size: contain;
   background-repeat: no-repeat;
+  border-left: 4px solid rgba(255,255,255, .864);
 }
 
 .right-about{
@@ -59,7 +90,7 @@
   width: 50%;
   background: rgba(0,0,0, .5);
   background: #445566;
-  border-left: 4px solid rgba(255,255,255, .864);
+  background: #556644;
   color: white;
   padding: 3em;
   text-align: center;
@@ -68,6 +99,36 @@
   justify-content: center;
   flex-direction: column;
   animation: 3s zoom-in-text;
+}
+
+.left-about-header{
+  order: 1;
+  width: 50%;
+  background: rgba(0,0,0, .5);
+  background: #445566;
+  background: #664455;
+  border-left: 4px solid rgba(255,255,255, .864);
+  border-top: 4px solid rgba(255,255,255, .864);
+  color: white;
+  padding: 3em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: 3s zoom-in-text;
+}
+
+.right-about-header{
+  border-top: 4px solid rgba(255,255,255, .864);
+  order: 2;
+  width: 50%;
+  animation: 3s zoom-in-image;
+  background: red;
+  background: url('./rikki.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  justify-content: center;
 }
 
 @keyframes zoom-in-image {
@@ -136,6 +197,57 @@
     box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
 }
 
+.about-message-austin, .about-message-rikki{
+    color: #445566;
+    border: 1px solid #445566;
+    background: rgba(255,255,255, .87584);
+    height: 60vh;
+    width: 36%;
+    border: 1px solid white;
+    border: 1px solid rgba(	68, 85, 102, .4);
+    border-radius: 5px;
+    padding: 1.5em;
+    font-family: helvetica;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    transform: rotate(-6deg);
+    flex-direction: column;
+    -webkit-box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
+    -moz-box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
+    box-shadow: -10px 3px 70px -5px;
+    box-sizing: border-box;
+    transition:
+      width 1.5s,
+      height 1.5s,
+      background 2s,
+      transform 2s,
+      color 2s,
+      border 1s;
+  margin-top: 3%;
+}
+
+.about-message-rikki{
+  transform: rotate(6deg);
+  animation: 3s about-rotate-rikki;
+  margin-left: 2%;
+  margin-top: 5%;
+
+}
+
+.about-message-rikki:hover, .about-message-austin:hover{
+  border: 1px solid #554466;
+  transform: scale(1.5);
+  z-index: 5;
+  background: rgba(255,255,255, .9);
+}
+
+.about-message-austin{
+  transform: rotate(-6deg);
+  animation: 3s about-rotate-austin;
+}
+
 .welcome-p{
   text-transform: capitalize;
   font-size: .8em;
@@ -147,13 +259,20 @@
   padding-bottom: 1em;
 }
 .welcome-title{
-  /*text-transform: capitalize;
-  font-size: .8em;
-  text-align: center;
-  color: gray;
-  border-top: 3px solid #445566;*/
   padding-bottom: 1em;
   text-align: center;
+}
+
+.welcome-title-about{
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.name, .name-austin{
+  order: 1;
+  margin: 2%;
+  padding: 1.5em;
 }
 
 @keyframes welcome-message{
@@ -170,6 +289,32 @@
     100% { transform: rotate(0deg); }
 }
 
+
+@keyframes about-rotate-rikki{
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+    transform: rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes about-rotate-austin{
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+    transform: rotate(-12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    transform: rotate(-6deg);
+  }
+}
 .start-button > a{
   border: 1px solid #446666;
   border-radius: 5px;
@@ -178,7 +323,66 @@
   color: #446666;
 }
 
+.glyp-button > a{
+  border: 1px solid #446666;
+  border-radius: 100px;
+  padding: 1em;
+  font-size: .5em;
+  color: #446666;
+}
+
 .outer-start{
   display: flex;
   justify-content: center;
+}
+
+.img-rikki, .img-austin{
+  background: url("./rikki.jpg");
+  background-size: cover;
+  background-position: top 10% left 25%;
+  height: 20vh;
+  width: 12vw;
+  border-radius: 100px;
+  border: 3px solid #665544;
+  order: 2;
+  margin: 2%;
+}
+
+.img-austin{
+  background: url("./austin.jpg");
+  background-size: cover;
+  background-position: top 10% left 25%;
+  order: 1;
+  height: 20vh;
+  width: 11vw;
+  border-radius: 100px;
+
+}
+
+.name-austin{
+  margin: 2%;
+  padding: 1.5em;
+  order: 2;
+  padding-bottom: 3em;
+}
+
+.about-traveling-salesman{
+  color: #445566;
+  border: 1px solid #445566;
+  background: rgba(255,255,255, .87584);
+  height: auto;
+  width: 85%;
+  border: 1px solid white;
+  border: 1px solid rgba(	68, 85, 102, .4);
+  border-radius: 5px;
+  padding: 1.5em;
+  font-family: helvetica;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  -webkit-box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
+  -moz-box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
+  box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
 }

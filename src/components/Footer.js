@@ -3,7 +3,6 @@ import utils                  from '../utils/helper.js'
 import { Link }               from 'react-router';
 import '../css/footer.css';
 
-
 class Footer extends Component {
 
   render() {
@@ -15,7 +14,6 @@ class Footer extends Component {
       </div>
     );
   }
-
 }
 
 export default Footer;

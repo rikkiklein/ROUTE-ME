@@ -1,6 +1,6 @@
 import React, {Component}              from 'react';
 import utils                           from '../utils/helper.js'
-
+import NavBar                          from './NavBar.js';
 import '../css/footer.css';
 import '../css/search.css';
 
