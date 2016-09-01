@@ -13,6 +13,9 @@ export default {
   },
   saveRoutes: function(data){
     return axios.post('http://localhost:3000/saved-routes/new', data)
+  },
+  deleteRoute: function(name){
+    return axios.delete('http://localhost:3000/saved-routes/' + name)
   }
 
 }
