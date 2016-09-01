@@ -15,26 +15,35 @@ class NameModal extends Component {
      super();
      this.state = {
        value: "",
-       showModal: true
+       showModal: true,
+       error: ""
      }
    }
 
    handleSubmit(event){
      event.preventDefault();
      let name = event.target.elements[0].value;
-     this.setState({value: name});
-     let sp = this.props.sp;
-     let data = {
-       name: name,
-       shortest_path: sp
+     if(name.length > 0){
+       this.setState({value: name});
+       let sp = this.props.sp;
+       let data = {
+         name: name,
+         shortest_path: sp
+       }
+       utils.saveRoutes(data).then((res) => {
+         console.log("SAVED ROUTE RESPONSE", res);
+         browserHistory.push(`/view-routes`);
+       })
      }
-     utils.saveRoutes(data).then((res) => {
-       console.log("SAVED ROUTE RESPONSE", res);
-       browserHistory.push(`/view-routes`);
-     })
+
+     else {
+       this.setState({error: "Name is missing! Please enter a name."})
+     }
+
 
    }
    render(){
+     let error = this.state.error;
      return (
        <div className="event-modal">
          <Modal show={this.state.showModal}>
@@ -47,6 +56,7 @@ class NameModal extends Component {
                  <br/>
                  <button id="route-button" type="submit">Add</button>
                </form>
+              {error.length ? error : ""}
              </Modal.Body>
          </Modal>
        </div>
