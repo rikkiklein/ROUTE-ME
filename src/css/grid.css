@@ -1,0 +1,48 @@
+.flexGrid{
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.colAFlex, .colBFlex, .colCFlex{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 4px solid rgba(255,255,255, .3);
+  height: 35vh;
+  border: 4px solid red;
+}
+
+.colAFlex{
+  order: 1;
+
+}
+
+.colBFlex{
+  order: 2;
+}
+
+.colCFlex{
+  order: 3;
+}
+
+.grid-outer{
+  display: flex;
+  justify-content: center;
+}
+
+.grid{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  width: 100%;
+}
+
+.box{
+  animation: 3s zoom-in-text;
+  height: 35vh;
+  padding: 1em;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

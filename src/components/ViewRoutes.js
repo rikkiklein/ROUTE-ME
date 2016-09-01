@@ -1,8 +1,10 @@
-import React, {Component}              from 'react';
-import utils                           from '../utils/helper.js'
-import NavBar                          from './NavBar.js';
+import React, {Component}       from 'react';
+import utils                    from '../utils/helper.js'
+import NavBar                   from './NavBar.js';
+import Header                   from './Header.js';
 import '../css/footer.css';
 import '../css/search.css';
+import '../css/grid.css';
 
 class ViewRoutes extends Component {
   constructor(props){
@@ -37,11 +39,17 @@ class ViewRoutes extends Component {
           )
         })
         return (
-          <div key={index}>
-            <div>{item.name}: {path}</div>
-            <button>View More Info</button>
+        <div key={index}>
+          <div className="box">
+          <div className="item-name">
+            {item.name}
           </div>
-
+          <div className="item-path">
+            {path}
+          </div>
+          <button>Delete Route</button>
+          </div>
+        </div>
         )
       })
 
@@ -55,7 +63,14 @@ class ViewRoutes extends Component {
 
     return (
       <div>
-        {this.showRoutes()}
+        <Header/>
+        <NavBar/>
+
+        <div className="grid-outer">
+          <div className="grid">
+              {this.showRoutes()}
+          </div>
+        </div>
       </div>
     )
   }
