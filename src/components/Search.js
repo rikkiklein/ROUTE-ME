@@ -322,7 +322,7 @@ class Search extends Component {
                   {this.state.mid_locations.map((mid_loc, index) =>
                     <div id="additional" key={mid_loc}>
                       <AdditionalLocation id="addLoc" ref={mid_loc} locKey={mid_loc} key={mid_loc} />
-                      <button className="button-del" type="button" onClick={(event) => this.removeMidLocation(index)}>X</button>
+                      <button className="button-del" onClick={(event) => this.removeMidLocation(index)}>X</button>
                     </div>
                   )}
                   <GeoSuggest className="input ending search-fade" onSuggestSelect={this.changeEndLoc.bind(this)} placeholder="end location..." />

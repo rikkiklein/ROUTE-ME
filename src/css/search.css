@@ -50,22 +50,22 @@ h3{
   flex-direction: row;
   text-align: center;
   margin-top: 1%;
+  justify-content: center;
+
 }
 
 .button-add{
-  width: 50%;
-  height: 8vh;
+  width: 46%;
   text-align: center;
   border: 1px solid transparent;
   border-radius: 5px;
   border: 1px solid rgba(0,0,0,.14);
   margin: 1%;
   background: #f5eff2;
-  font-size: .6em;
   border: 1px solid #664455;
   transition:  width 1.5s, height 1.5s, background 2s, transform 2s, color 2s, border 0.15s linear, -webkit-transform 2s;
-  font-size: 1em;
-  padding: .5em;
+  font-size: .8em;
+  padding: 1em;
   text-transform: uppercase;
   letter-spacing: .2em;
 }
@@ -83,19 +83,41 @@ form{
 input{
   border: 2px solid #445566;
   padding: 1em;
+  font-size: 1.3em;
   border-radius: 5px;
 }
-
 #additional{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#additional input{
+  width: 90%;
 }
 
 .button-del{
   border: 1px solid transparent;
   background: transparent;
-  color: #ff6666;
+  color: #446655;
+  border: 1px solid #446655;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  padding-right: 1em;
+  padding-left: 1em;
+  padding-top: .6em;
+  padding-bottom: .3em;
+  border-radius: 5px;
+  transition:  width 1.5s, height 1.5s, background 2s, transform 2s, color 2s, border 0.15s linear, -webkit-transform 2s;
+
+}
+
+.button-del:hover{
+  color: #698476;
+  background: #ecefee;
 }
 
 .right-search{
@@ -130,10 +152,19 @@ input{
   padding: 1em;
   border-radius: 5px;
   width: 45%;
+  padding: 1em;
+}
+
+.shortest-path{
+  padding: 1em;
+  margin-bottom: 10%;
+  margin-top: 37%;
 }
 
 .directions{
-  margin-top: 42%;
+  position: absolute;
+  margin-top: 60%;
+  padding: 1em;
   justify-content: center;
   display: flex;
   flex-direction: column;
