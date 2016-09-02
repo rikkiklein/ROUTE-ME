@@ -132,12 +132,18 @@ input{
   opacity: .4;
 }
 
-.directions-button{
+.directions-button, .directions-button-save, #route-button{
   background: transparent;
   border: 1px solid #445566;
   padding: 1em;
   border-radius: 5px;
   z-index: 1;
+  transition:  width 1.5s, height 1.5s, background 2s, transform 2s, color 2s, border 0.15s linear, -webkit-transform 2s;
+
+}
+
+.directions-button:hover, .directions-button-save:hover, #route-button:hover{
+  color: #664455;
 }
 
 .path-item{
@@ -206,4 +212,26 @@ input{
 
 .mid-form{
   width: 100%;
+}
+
+.directions-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.directions-col{
+  display: column;
+  flex-direction: column;
+}
+
+.dir-h3{
+  border-bottom: 2px solid #664455;
+  margin-bottom: 5%;
+}
+
+
+.dirToRender{
+  color: #446655;
+  font-weight: bold;
 }

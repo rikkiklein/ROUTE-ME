@@ -378,15 +378,16 @@
   -webkit-box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
   -moz-box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
   box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
+  padding: 1em;
 }
 
 .img-tsp{
   background: url("./tsp.png");
-  background-size: contain;
+  background-size: cover;
   background-position: center center;
   order: 1;
-  height: 20vh;
-  width: 20vw;
+  height: 28vh;
+  width: 28vw;
   border: 1px solid #445566;
   border-radius: 5px;
   background-repeat: no-repeat;
@@ -394,4 +395,17 @@
 
 .search-background{
   animation: 3s zoom-in-text;
+}
+
+.tsp-p{
+  text-transform: none;
+  font-size: .8em;
+  padding: 1em;
+  padding: 2em;
+  width: 80%;
+}
+
+.outer-start-tsp{
+  display: flex;
+  justify-content: center;
 }

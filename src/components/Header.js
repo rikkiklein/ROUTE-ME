@@ -12,7 +12,7 @@ class Header extends Component {
     return (
       <div className="header-outer">
         <div className="left">
-          <p>Welcome to Route Calculator!</p>
+          <p>Welcome to Route ME!</p>
           <p>
             Optimize your multiple stop route by
             using the Traveling Salesman Algorithm!

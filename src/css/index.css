@@ -25,7 +25,6 @@ body {
 }
 
 .button:hover{
-  border: 1px solid blue;
 }
 
 .button a{
@@ -38,21 +37,26 @@ h5{
 }
 
 #model-header{
-  border: 4px solid purple;
 }
 
 #event-title{
-  border: 5px solid green;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 #event-form{
-  border: 4px solid blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #route-name{
-  border: 4px solid yellow;
+  text-align: center;
 }
 
 #route-button{
-  border: 3px solid lightgreen;
+  width: 30%;
+  justify-content: flex-end;
+  right: 0;
+  margin-left: 35%;
 }

@@ -49,17 +49,31 @@ class HomeHeaderAbout extends Component {
         </div>
 
         <div className="outer-TSP">
+
           <div className="about-traveling-salesman">
             <div className="welcome-title-TSP">
               <div className="name">Traveling Salesman Problem <br/>The Nearest Neighbor Approach</div>
             </div>
-            <p className="welcome-p">
-              Optimize your multiple stop route by
-              using the Traveling Saleman Algorithm!
-              <div className="img-tsp"></div>
+
+            <div className="outer-start-tsp">
+
+              <p className="welcome-p">
+                Optimize your multiple stop route by
+                using the Traveling Saleman Algorithm!
+                </p>
+
+            </div>
+
+            <div className="outer-start-tsp">
+              <p className="tsp-p">
+                Traveling salesman problem (TSP) is an NP-hard problem which tries to solve the problem of given a list of locations and distances, what is the shortest path that visits each location exactly once. There are various  algorithms to solve TSP. We chose to solve it using the Nearest Neighbor Algorithm(NNA). This algorithm starts at a location and repeatedly visits the next shortest path and continues until each location is visited. This algorithm quickly returns a tour but not necessarily the most optimal.
               </p>
-              <div className="outer-start">
-              </div>
+            </div>
+
+            <div className="outer-start">
+              <div className="img-tsp"></div>
+            </div>
+
           </div>
         </div>
       </div>

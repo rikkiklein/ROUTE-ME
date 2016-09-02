@@ -14,7 +14,7 @@ class HomeHeader extends Component {
       <div className="home-header-outer-left">
         <div className="welcome-message">
           <div className="welcome-title">
-            Welcome to Route Calculator
+            Welcome to Route ME
           </div>
           <p className="welcome-p">
             Optimize your multiple stop route by

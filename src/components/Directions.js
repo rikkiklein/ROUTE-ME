@@ -1,7 +1,7 @@
 import React, {Component}   from 'react';
 import {browserHistory}     from 'react-router';
 import Model                from './NameModal.js'
-
+import '../css/search.css';
 class Directions extends Component {
 
   constructor(props){
@@ -13,21 +13,21 @@ class Directions extends Component {
 
   makeDirections(){
     let directions = this.props.directions;
-    let dirToRender = "";
+    let dirToRender = "<h3 class='dir-h3'>Directions:</h3>";
     for(let prop in directions){
       for(let info in directions[prop]){
         if(info === 'start_address'){
 
-          dirToRender += "<div>From " + directions[prop][info] + "</div>";
+          dirToRender += "<div class='dirToRender'>From: " + directions[prop][info] + "</div><br/>";
         }
         if(info === 'end_address'){
-          dirToRender += "<div> To " + directions[prop][info] + "</div>";
+          dirToRender += "<div class='dirToRender'> To: " + directions[prop][info] + "</div><br/>";
         }
 
         if(info === 'steps'){
           let steps = ""
           directions[prop][info].map(function(step, index){
-              dirToRender += step.html_instructions;
+              dirToRender += step.html_instructions += '<br>';
           });
         }
       }
@@ -51,9 +51,20 @@ class Directions extends Component {
 
     return (
       <div>
-        {length > 0 ? this.makeDirections(): ""}
-        <button onClick={(event)=> this.createRouteToSave(event)}>Save Route</button>
-        {clicked ? <Model sp={sp}/> : ""}
+        <div className="directions-col">
+
+          <div className="directions-row">
+            {length > 0 ? this.makeDirections(): ""}
+          </div>
+
+          <div className="directions-row">
+            <button className="directions-button-save"
+              onClick={(event)=> this.createRouteToSave(event)}>Save Route</button>
+            {clicked ? <Model sp={sp}/> : ""}
+          </div>
+
+        </div>
+
       </div>
     );
   }

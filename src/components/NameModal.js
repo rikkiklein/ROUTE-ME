@@ -48,11 +48,11 @@ class NameModal extends Component {
        <div className="event-modal">
          <Modal show={this.state.showModal}>
            <Modal.Header id="modal-header">
-             <Modal.Title id="event-title">Route</Modal.Title>
+             <Modal.Title id="event-title">Name Your Route You want to Save!</Modal.Title>
            </Modal.Header>
              <Modal.Body>
                <form id="event-form" onSubmit={(event)=>this.handleSubmit(event)}>
-                 <input id="route-name" type="text" placeholder="Route Name" ></input>
+                 <input className="mod-name" id="route-name" type="text" placeholder="Route Name" ></input>
                  <br/>
                  <button id="route-button" type="submit">Save This Route!</button>
                </form>
