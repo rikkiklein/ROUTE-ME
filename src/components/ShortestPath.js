@@ -18,7 +18,7 @@ class ShortestPath extends Component {
       <div className="shortest-path">
         {shortestPath.map((item, index)=>{
             return(
-              <div className="path-item" key={index}>{item}</div>
+              <div className="path-item" key={index}>Stop #{index+1} : {item}</div>
             )
         })}
       </div>

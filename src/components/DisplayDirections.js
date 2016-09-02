@@ -33,11 +33,12 @@ class DisplayDirections extends Component {
     const dLength = directions.length;
     return (
       <div>
-        <div>
-          {dLength > 0 ? <Directions directions={directions} shortestPath={shortestPath} /> : "" }
-          {length > 0 ?
-            <button className="directions-button" onClick={(event)=>this.viewDirections()}>View Directions</button> : ""}
-        </div>
+            <div className="directions">
+              {dLength > 0 ? <Directions directions={directions} shortestPath={shortestPath} /> : "" }
+              <div className="directions-but-area">
+                {length > 0 ? <button className="directions-button" onClick={(event)=>this.viewDirections()}>View Directions</button> : ""}
+              </div>
+            </div>
       </div>
     );
   }

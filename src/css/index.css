@@ -36,3 +36,23 @@ body {
 h5{
   color: #ff6666;
 }
+
+#model-header{
+  border: 4px solid purple;
+}
+
+#event-title{
+  border: 5px solid green;
+}
+
+#event-form{
+  border: 4px solid blue;
+}
+
+#route-name{
+  border: 4px solid yellow;
+}
+
+#route-button{
+  border: 3px solid lightgreen;
+}

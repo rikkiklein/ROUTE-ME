@@ -6,6 +6,7 @@
   position: relative;
   margin: 1em auto;
   text-align: left;
+  width: 100%;
 }
 .geosuggest__input {
   -webkit-transition: border 0.2s, box-shadow 0.2s;

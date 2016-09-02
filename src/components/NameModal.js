@@ -37,7 +37,7 @@ class NameModal extends Component {
      }
 
      else {
-       this.setState({error: "Name is missing! Please enter a name."})
+       this.setState({error: "Uh Oh! You forgot to enter a name! Please enter a name."})
      }
 
 
@@ -54,7 +54,7 @@ class NameModal extends Component {
                <form id="event-form" onSubmit={(event)=>this.handleSubmit(event)}>
                  <input id="route-name" type="text" placeholder="Route Name" ></input>
                  <br/>
-                 <button id="route-button" type="submit">Add</button>
+                 <button id="route-button" type="submit">Save This Route!</button>
                </form>
               {error.length ? error : ""}
              </Modal.Body>
@@ -65,5 +65,3 @@ class NameModal extends Component {
  }
 
 export default NameModal;
-
-// <div className="button"><Link to="/search">Get Started!</Link></div>
