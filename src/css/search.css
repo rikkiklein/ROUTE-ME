@@ -146,3 +146,21 @@ input{
   border: 1px solid #664455;
   border-radius: 5px;
 }*/
+
+
+.path-item{
+  color: gray;
+}
+
+.shortest-path{
+  position: absolute;
+  margin-top: 35%;
+  padding: 1em;
+  background: rgba(247,242,244, .5);
+  border: 1px solid lightblue;
+  border-radius: 5px;
+  width: 45%;
+  box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
+
+
+}

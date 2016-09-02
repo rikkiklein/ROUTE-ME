@@ -308,6 +308,7 @@ class Search extends Component {
               <h3>Begin Calculating your route! </h3>
               <h4>Enter your starting, middle and ending locations, then press <span className="calcDist">calculate distance!</span></h4>
             </div>
+
             <div className="flex-search">
               <div className="left-search">
                 <div className="but-area">
@@ -329,12 +330,12 @@ class Search extends Component {
 
                 <DisplayDirections shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
 
-              <ShortestPath shortestPath={this.state.shortest_route}/>
               </div>
 
               <div className="right-search">
                 <DisplayMap shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
-              </div>
+                <ShortestPath shortestPath={this.state.shortest_route}/>
+            </div>
           </div>
         </div>
       </div>

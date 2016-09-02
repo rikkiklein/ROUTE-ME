@@ -15,10 +15,10 @@ class ShortestPath extends Component {
     const shortestPath = this.props.shortestPath;
     console.log("shortest path is", this.props.shortestPath);
     return (
-      <div>
+      <div className="shortest-path">
         {shortestPath.map((item, index)=>{
             return(
-              <div key={index}>{item}</div>
+              <div className="path-item" key={index}>{item}</div>
             )
         })}
       </div>
