@@ -386,11 +386,12 @@
   background-size: cover;
   background-position: center center;
   order: 1;
-  height: 28vh;
+  height: 30vh;
   width: 28vw;
   border: 1px solid #445566;
   border-radius: 5px;
   background-repeat: no-repeat;
+  margin-top: -5%;
 }
 
 .search-background{
@@ -408,4 +409,13 @@
 .outer-start-tsp{
   display: flex;
   justify-content: center;
+  flex-direction: column;
+}
+
+.tsp-a{
+  color: maroon;
+}
+
+.tsp-a:hover{
+  color: navy;
 }

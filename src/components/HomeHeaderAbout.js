@@ -66,7 +66,29 @@ class HomeHeaderAbout extends Component {
 
             <div className="outer-start-tsp">
               <p className="tsp-p">
-                Traveling salesman problem (TSP) is an NP-hard problem which tries to solve the problem of given a list of locations and distances, what is the shortest path that visits each location exactly once. There are various  algorithms to solve TSP. We chose to solve it using the Nearest Neighbor Algorithm(NNA). This algorithm starts at a location and repeatedly visits the next shortest path and continues until each location is visited. This algorithm quickly returns a tour but not necessarily the most optimal.
+                Traveling Salesman Problem (TSP) is an NP-Complete problem that attempts to solve the issue that arises when multiple stops are needed to be made along a route.
+              <br/>
+                <br/>
+
+                What is the shortest path that visits each location exactly once.  There are various algorithms to solve TSP.  This app is incorporated using the Nearest Neighbor Algorithm (NNA).
+              <br/>
+                <br/>
+
+                 NNA starts at a start location and repeatedly visits the next shortest path and continuesly does so until each location has been visited.  This algorithm quickly returns a tour but not necessarily is is the most optimal solution.
+                 <br/>
+                   <br/>
+
+
+                 APIS that were used in creating this app:
+                 <br/>
+                 <a className="tsp-a" target="_blank" href="https://developers.google.com/maps/documentation/distance-matrix/">Google Distance Matrix API</a> <br/>
+
+                 <a className="tsp-a" target="_blank" href="https://developers.google.com/maps/documentation/directions/">Google Directions API</a> <br/>
+
+                 <a  className="tsp-a" target="_blank" href="https://developers.google.com/maps/web/">Google Maps API</a> <br/>
+
+
+
               </p>
             </div>
 
