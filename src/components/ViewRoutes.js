@@ -67,8 +67,6 @@ class ViewRoutes extends Component {
     }
     return (r)
   }
-
-
   render() {
 
     return (
@@ -81,8 +79,6 @@ class ViewRoutes extends Component {
               {this.showRoutes()}
           </div>
         </div>
-
-        <Footer/>
       </div>
     )
   }

@@ -8,7 +8,8 @@ import Header                 from './Header.js';
 import SavedRoutes            from './SavedRoutes.js';
 import { browserHistory }     from 'react-router';
 import ShortestPath           from './ShortestPath.js';
-import index                  from './index.js';
+import DisplayMap             from './DisplayMap.js';
+import DisplayDirections      from './DisplayDirections.js';
 
 import '../css/search.css';
 import '../css/suggest.css';
@@ -41,9 +42,7 @@ class Search extends Component {
       let key = this.refs[prop].state.location;
       latLong.push({[key]: this.refs[prop].state.latlong })
     }
-
     this.setState({mid_locationsLatLong: latLong});
-
     let data = {
       start: start,
       mid_locations: midLocations,
@@ -63,17 +62,13 @@ class Search extends Component {
       let me = this.makeMatrixME(res.data.ME);
       this.makeFullMatrix(bm, mm, me);
 
-      //get the lat and long
       let latLongs = [];
-
       latLongs.push(this.state.start_lat_long);
       latLongs.push(this.state.mid_locationsLatLong);
       latLongs.push(this.state.end_lat_long);
-
       this.setState({latLongs: latLongs})
     })
-
-}
+  }
 
   solveTSP(matrix){
     // we are planning to solve the TSP by nearest neighbor
@@ -109,7 +104,6 @@ class Search extends Component {
 
       for(let i = 0; i < middleMatrix.length; i++){
         if(middleMatrix[i].origin === currentMinName){
-          console.log("they are equal!");
           originArray.push(middleMatrix[i]);
         }
       } //end for loop
@@ -137,45 +131,23 @@ class Search extends Component {
         gm_locations.splice(index, 1);
       }
     }
-    console.log("GM LOCATIONS", gm_locations);
+
     if(gm_locations.length !== 0){
         shortestPath[shortestPath.length-1] = gm_locations.pop();
     }
     shortestPath.push(this.state.end);
-    console.log("WE ARE DONE", shortestPath);
 
     this.setState({
       shortest_route: shortestPath
     })
-
-
-  } //end func
+  }
 
   makeFullMatrix(bm, mm, me){
     let fullMatrix = [];
-
     fullMatrix.push(bm);
     fullMatrix.push(mm);
     fullMatrix.push(me);
-    // // add bm
-    // for(let i = 0; i < bm.length; i++){
-    //   fullMatrix.push(bm[i]);
-    // }
-    //
-    // //add mm
-    // for(let i = 0; i < mm.length; i++){
-    //   fullMatrix.push(mm[i]);
-    // }
-    // //add me
-    // for(let i = 0; i < me.length; i++){
-    //   fullMatrix.push(me[i]);
-    // }
-
-    console.log("full matrix", fullMatrix);
-
-    //solve TSP
     this.solveTSP(fullMatrix);
-
   }
 
   makeMatrixBM(data){
@@ -206,12 +178,10 @@ class Search extends Component {
       }//end if
     }//end of for let prop
 
-    console.log("ARRAY TO PUSH: ", arrayToPush);
     return arrayToPush;
   } //end of function
 
   makeMatrixMM(data){
-    console.log("mm is", data);
     let arrayToPush = [];
     for(let i = 0; i < data.destination_addresses.length; i++){
       for(let j = 0; j < data.origin_addresses.length;j++)
@@ -222,10 +192,8 @@ class Search extends Component {
       if(prop === "destination_addresses"){
         let len = data[prop].length;
         let count = 0;
-        console.log("len is", len);
         let limit = len * len;
           for(let d = 0; d < limit; d+=len){
-            console.log("d is", d);
             let upperBound = d + len;
             count = 0;
             for(let k = d; k < upperBound; k++){
@@ -237,10 +205,8 @@ class Search extends Component {
       if(prop === "origin_addresses"){
         let len = data[prop].length;
         let count = -1;
-        console.log("len is", len);
         let limit = len * len;
           for(let d = 0; d < limit; d+=len){
-            console.log("d is", d);
             let upperBound = d + len;
             count++;
             for(let k = d; k < upperBound; k++){
@@ -250,45 +216,27 @@ class Search extends Component {
       }
 
       if(prop === "rows"){
-        console.log("rows prop", data[prop]);
         let len = data[prop].length;
         let index = 0;
-        // let count = -1;
-        console.log("len is", len);
-        //looping thru outer rows
         for(let i = 0; i < len; i++){
           //loop thru elements
           for(let j = 0; j<data[prop][i].elements.length; j++){
-            console.log("$$$$",j, data[prop][i].elements[j].distance.value);
             arrayToPush[index].distance = data[prop][i].elements[j].distance.value;
             index++;
           }
         }
 
-        //edit the MM matrix for extra data
         for(let i = 0; i < arrayToPush.length; i++){
-        // prune the rows that have distance equal to 0
           if(arrayToPush[i].distance === 0){
             arrayToPush.splice(i, 1);
           }
         }
-
       }
-
-
-
     }
-    //only need half of the results because A-B and B-A are the same thing, we don't need both since they are associative
-    // let halfLength = Math.floor(arrayToPush.length / 2);
-    // let upperHalf = arrayToPush.splice(0, halfLength);
-    //
-    // console.log("array to push in mm", arrayToPush);
-    // console.log("half of the array", upperHalf);
     return arrayToPush;
   } //end of function
 
   makeMatrixME(data){
-    console.log(data);
     let arrayToPush = [];
     for(let i = 0; i < data.origin_addresses.length; i++){
       arrayToPush.push({origin: "", destination: "", distance: 0});
@@ -312,7 +260,6 @@ class Search extends Component {
       }
     }
 
-    console.log("atP", arrayToPush);
     return arrayToPush;
   } //end of function
 
@@ -323,10 +270,8 @@ class Search extends Component {
   changeEndLoc(input){
     this.setState({end: input.label, end_lat_long: input.location })
   }
-  // <div dangerouslySetInnerHTML ={{__html: 'Head \u003cb\u003esoutheast\u003c/b\u003e on \u003cb\u003eW 16th St\u003c/b\u003e toward \u003cb\u003eNinth Ave\u003c/b\u003e'}}/>
 
   addMidLocation(){
-      //limit the mid locations since solving TSP get's longer the more points you have
       if(this.state.mid_locations.length < 10){
         let newMidLocation = `mid-loc-${this.state.mid_locations.length}`;
         let updatedLocations = this.state.mid_locations;
@@ -355,40 +300,39 @@ class Search extends Component {
 
   render() {
     return (
-      <div>
+      <div className="search-background">
         <div>
-          <Header/>
           <NavBar/>
           <div className="search-fade">
             <div className="flex-search">
               <div className="left-search">
+                <div className="but-area">
+                  <button className="button-add search-fade-in three" id="add-way-point" onClick={(event) => this.addMidLocation()}>Add Waypoint</button>
+
+                  <button className="button-add search-fade-in four" onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
+                </div>
+
                 <form onSubmit={(event)=>this.getDistance(event)}>
-                  <GeoSuggest className="input search-fade" onSuggestSelect={this.changeStartLoc.bind(this)} placeholder="start location..."/>
+                  <GeoSuggest className="input beginning search-fade" onSuggestSelect={this.changeStartLoc.bind(this)} placeholder="start location..."/>
                   {this.state.mid_locations.map((mid_loc, index) =>
                     <div id="additional" key={mid_loc}>
-                      <AdditionalLocation ref={mid_loc} locKey={mid_loc} key={mid_loc} />
+                      <AdditionalLocation id="addLoc" ref={mid_loc} locKey={mid_loc} key={mid_loc} />
                       <button className="button-del" type="button" onClick={(event) => this.removeMidLocation(index)}>X</button>
                     </div>
                   )}
-                  <GeoSuggest className="input search-fade" onSuggestSelect={this.changeEndLoc.bind(this)} placeholder="end location..." />
-                  <div className="but-area">
-                    <button className="button-add search-fade-in three" id="add-way-point" onClick={(event) => this.addMidLocation()}>Add Waypoint</button>
-                    <button className="button-add search-fade-in four" onClick={(event) => this.getDistance(event)}>Calculate Distance</button>
-                    </div>
+                  <GeoSuggest className="input ending search-fade" onSuggestSelect={this.changeEndLoc.bind(this)} placeholder="end location..." />
                 </form>
+
+                <DisplayDirections shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
               </div>
 
               <div className="right-search">
-                <SavedRoutes shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
+                <DisplayMap shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
               </div>
-            </div>
-
-            <div className="shortest">
-              <ShortestPath shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
-            </div>
           </div>
         </div>
       </div>
+    </div>
     );
   }
 }

@@ -4,7 +4,6 @@ import Model                from './NameModal.js'
 
 class Directions extends Component {
 
-
   constructor(props){
     super(props);
     this.state = {
@@ -16,7 +15,6 @@ class Directions extends Component {
     let directions = this.props.directions;
     let dirToRender = "";
     for(let prop in directions){
-      console.log(directions[prop]);
       for(let info in directions[prop]){
         if(info === 'start_address'){
 
@@ -31,13 +29,9 @@ class Directions extends Component {
           directions[prop][info].map(function(step, index){
               dirToRender += step.html_instructions;
           });
-
         }
       }
-
     }
-
-    console.log("dirToRender", dirToRender);
 
     return (
       <div dangerouslySetInnerHTML ={{__html: dirToRender}}/>

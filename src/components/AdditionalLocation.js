@@ -22,7 +22,7 @@ class AdditionalLocation extends Component {
     let _this=this;
     console.log(this.state);
     return (
-      <GeoSuggest id={_this.props.locKey}  onSuggestSelect={_this.handleLocation.bind(this)}/>
+      <GeoSuggest id={_this.props.locKey} className="geoSuggestInput" onSuggestSelect={_this.handleLocation.bind(this)}/>
     );
   }
 }

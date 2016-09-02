@@ -15,7 +15,6 @@ class About extends Component {
         <div>
           <NavBar/>
           <HomeHeaderAbout/>
-          <Footer/>
         </div>
       </div>
     );

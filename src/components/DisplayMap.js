@@ -6,7 +6,7 @@ import {Map, Marker, InfoWindow}  from 'google-maps-react';
 import Directions                 from './Directions.js';
 import '../css/search.css';
 
-class SavedRoutes extends Component {
+class DisplayMap extends Component {
 
   constructor(props){
     super(props);
@@ -24,7 +24,6 @@ class SavedRoutes extends Component {
 
     let locations = latLongs.map(function(marker, index){
       let name, lat, long;
-
         if(index === 0){
           name = shortestPath[0];
           lat = marker.lat;
@@ -32,7 +31,6 @@ class SavedRoutes extends Component {
           startLocation.push({name: name, lat:lat, long:long});
         }
 
-        //it's the middle routes need to map over them
         if(index === 1){
           console.log("MARKER", marker);
           for(let prop in marker){
@@ -89,7 +87,6 @@ class SavedRoutes extends Component {
         name = a.name;
         lat = a.lat;
         long = a.long;
-        console.log(name, lat, long);
         return(
           <Marker key={b}
           name={name}
@@ -119,12 +116,11 @@ class SavedRoutes extends Component {
     return(
         <Map center={{lat: startLat, lng: startLong}} zoom={9}
           containerStyle={
-           {width: '45%', height: '60%', position: 'fixed',
-}}
+           {width: '45%', height: '60%', position: 'fixed'}}
            style={
               {
                 boxShadow: "-10px 3px 70px -5px rgba(68,85,102,0.71)",
-                borderRadius: '5px',
+                borderRadius: '10px',
                 border: '1px solid lightblue'
               }
             }
@@ -134,18 +130,6 @@ class SavedRoutes extends Component {
               {end}
         </Map>
     )
-  }
-
-
-  viewDirections(){
-    let data = {
-      route: this.props.shortestPath
-    }
-
-    utils.getDirections(data).then((res) => {
-      console.log("res", res.data.routes[0].legs);
-      this.setState({directions: res.data.routes[0].legs})
-    })
   }
 
   render() {
@@ -158,15 +142,10 @@ class SavedRoutes extends Component {
         <div>
         {length > 0 ? this.makeMap() : ""}
         </div>
-
-        <div>
-          {dLength > 0 ? <Directions directions={directions} shortestPath={shortestPath} /> : "" }
-          {length > 0 ?
-            <button className="directions-button" onClick={(event)=>this.viewDirections()}>View Directions</button> : ""}
-        </div>
       </div>
     );
   }
+
 }
 
-export default SavedRoutes;
+export default DisplayMap;

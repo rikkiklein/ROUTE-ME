@@ -124,7 +124,6 @@
   order: 2;
   width: 50%;
   animation: 3s zoom-in-image;
-  background: red;
   background: url('./rikki.jpg');
   background-size: contain;
   background-repeat: no-repeat;
@@ -163,13 +162,6 @@
   }
   .left{
     width: 100%;
-    height: 60%;
-    background: url('road.jpg');
-    background-image:
-          linear-gradient(top, rgba(255,255,255,0.5235), rgba(255,255,255,0.46235)), url("road.jpg");
-    background-position: center center;
-    background-size: contain;
-    background-repeat: no-repeat;
   }
 }
 
@@ -329,6 +321,8 @@
   padding: 1em;
   font-size: .5em;
   color: #446666;
+  margin-left: 2%;
+
 }
 
 .outer-start{
@@ -396,4 +390,8 @@
   border: 1px solid #445566;
   border-radius: 5px;
   background-repeat: no-repeat;
+}
+
+.search-background{
+  animation: 3s zoom-in-text;
 }

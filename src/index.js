@@ -12,7 +12,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route    path="/"             component={App}/>
     <Route    path="/search"       component={Search}/>
-    <Route    path="/view-routes"   component={ViewRoutes}/>
+    <Route    path="/view-routes"  component={ViewRoutes}/>
     <Route    path="/addName"      component={Modal}/>
     <Route    path="/about"        component={About}/>
 
