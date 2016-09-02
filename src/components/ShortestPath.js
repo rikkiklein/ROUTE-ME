@@ -13,7 +13,7 @@ class ShortestPath extends Component {
 
   render() {
     const shortestPath = this.props.shortestPath;
-    const length = shortestPath.length;
+    console.log("shortest path is", this.props.shortestPath);
     return (
       <div>
         {shortestPath.map((item, index)=>{

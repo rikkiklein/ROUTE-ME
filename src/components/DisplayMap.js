@@ -117,7 +117,7 @@ class DisplayMap extends Component {
     return(
         <Map center={{lat: startLat, lng: startLong}} zoom={12}
           containerStyle={
-           {width: '45%', height: '60%', position: 'fixed'}}
+           {width: '45%', height: '60%', position: 'absolute'}}
            style={
               {
                 boxShadow: "-10px 3px 70px -5px rgba(68,85,102,0.71)",

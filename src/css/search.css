@@ -31,12 +31,10 @@
 
 form{
   width: 100%;
-  overflow: auto;
   padding: 1em;
   margin: 0 auto;
   display: block;
   text-align: center;
-  overflow:auto;
 }
 
 .button-add{
@@ -129,9 +127,7 @@ input{
 }
 
 .disabled{
-  background: lightgray;
-  color: gray;
-  border: 1px solid gray;
+  opacity: .4;
 }
 
 .directions-button{

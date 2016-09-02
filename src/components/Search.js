@@ -328,6 +328,8 @@ class Search extends Component {
                 </form>
 
                 <DisplayDirections shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
+
+              <ShortestPath shortestPath={this.state.shortest_route}/>
               </div>
 
               <div className="right-search">
