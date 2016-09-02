@@ -179,7 +179,6 @@ input{
 .directions-but-area{
   display: flex;
   flex-direction: row;
-  border: 3px solid blue;
   justify-content: center;
 }
 
