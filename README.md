@@ -10,6 +10,13 @@ Well now with Route Me you can find the shortest path that you need to take.
 
 <img src="https://github.com/rikkirabz/ROUTE-ME/blob/master/src/screenshots/RM-Map.png"/>
 
+<img src="https://github.com/rikkirabz/ROUTE-ME/blob/master/src/screenshots/RM-View.png"/>
+
+<img src="https://github.com/rikkirabz/ROUTE-ME/blob/master/src/screenshots/RM-about1.png"/>
+
+<img src="https://github.com/rikkirabz/ROUTE-ME/blob/master/src/screenshots/RM-about2.png"/>
+
+<img src="https://github.com/rikkirabz/ROUTE-ME/blob/master/src/screenshots/RM-about3.png"/>
 
 ### Technical Details
 
