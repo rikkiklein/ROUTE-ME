@@ -61,8 +61,9 @@ class DisplayMap extends Component {
       long = loc.long;
 
       return(
-        <Marker key={name}
-        name={name}
+        <Marker
+          key={name}
+          name={name}
         position={{lat: lat, lng: long}} />
       )
     })
@@ -114,7 +115,7 @@ class DisplayMap extends Component {
     }
 
     return(
-        <Map center={{lat: startLat, lng: startLong}} zoom={9}
+        <Map center={{lat: startLat, lng: startLong}} zoom={12}
           containerStyle={
            {width: '45%', height: '60%', position: 'fixed'}}
            style={

@@ -304,6 +304,10 @@ class Search extends Component {
         <div>
           <NavBar/>
           <div className="search-fade">
+            <div className="flex-title">
+              <h3>Begin Calculating your route! </h3>
+              <h4>Enter your starting, middle and ending locations, then press <span className="calcDist">calculate distance!</span></h4>
+            </div>
             <div className="flex-search">
               <div className="left-search">
                 <div className="but-area">

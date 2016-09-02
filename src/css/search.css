@@ -96,6 +96,16 @@ form{
 .flex-search{
   display: flex;
   flex-direction: row;
+  padding: 1em;
+}
+
+.flex-title{
+  display: block;
+  margin: 0 auto;
+  padding: 1em;
+  border-bottom: 3px solid maroon;
+  width: 80%;
+  text-transform: capitalize;
 }
 
 .right-search{
@@ -107,7 +117,7 @@ form{
 }
 
 .left-search{
-  width: 50%;
+  width: 40%;
   padding: 2em;
 }
 
