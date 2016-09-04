@@ -327,12 +327,13 @@ class Search extends Component {
                   )}
                   <GeoSuggest className="input ending search-fade" onSuggestSelect={this.changeEndLoc.bind(this)} placeholder="end location..." />
                 </form>
+                <DisplayDirections shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
+
               </div>
 
               <div className="right-search">
                 <DisplayMap shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
                 <ShortestPath shortestPath={this.state.shortest_route}/>
-                <DisplayDirections shortestPath={this.state.shortest_route} locations={this.state.latLongs}/>
             </div>
             </div>
 

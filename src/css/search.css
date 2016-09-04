@@ -146,6 +146,17 @@ input{
   color: #664455;
 }
 
+
+.directions-button-save{
+  margin-top: 10%;
+  margin-bottom: 10%;
+  transition:  width 1.5s, height 1.5s, background 2s, transform 2s, color 2s, border 0.15s linear, -webkit-transform 2s;
+}
+
+.directions-button-save:hover{
+    color: #774455;
+    border: 1px solid #774455;
+}
 .path-item{
   color: gray;
   text-transform: uppercase;
@@ -153,27 +164,24 @@ input{
 }
 
 .shortest-path, .directions{
-  position: absolute;
-  margin-top: 35%;
   padding: 1em;
   border-radius: 5px;
-  width: 45%;
   padding: 1em;
 }
 
 .shortest-path{
+  position: absolute;
   padding: 1em;
   margin-bottom: 10%;
   margin-top: 37%;
 }
 
 .directions{
-  position: absolute;
-  margin-top: 60%;
   padding: 1em;
   justify-content: center;
   display: flex;
   flex-direction: column;
+    width: 100%;
 }
 
 .directions-but-area{
