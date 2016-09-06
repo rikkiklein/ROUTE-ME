@@ -60,3 +60,10 @@ h5{
   right: 0;
   margin-left: 35%;
 }
+
+@media screen and (max-width: 450px){
+  #route-button{
+    width: 100%;
+    margin-left: 0%;
+  }
+}

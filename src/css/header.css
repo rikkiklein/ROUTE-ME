@@ -152,18 +152,18 @@
   }
 }
 
-@media screen and (max-width: 450px){
-  .header-outer{
-    display: block;
+@keyframes title-welcome {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
   }
-  .right{
-    width: 100%;
-    border-left: 4px solid transparent;
-  }
-  .left{
-    width: 100%;
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
+
+
 
 .welcome-message{
     animation: 5s welcome-message linear,
@@ -188,6 +188,66 @@
     -moz-box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
     box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
 }
+
+
+@media screen and (max-width: 450px){
+  .header-outer{
+    flex-direction: column;
+    height: 80vh;
+  }
+  
+  .right{
+    width: 100%;
+    animation: 3s zoom-in-image;
+    background: url('map-blue-2.png');
+    background-position: top 2% center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50vh;
+    order: 1;
+    border-left: none;
+
+  }
+
+  .left{
+    width: 100%;
+    order: 2;
+    border: none;
+  }
+
+  .home-header-outer-left{
+    padding-left: 0em;
+    padding: 1em;
+  }
+
+  .welcome-message{
+    animation: 5s title-welcome linear;
+    color: #445566;
+    border: 1px solid #445566;
+    background: rgba(255,255,255, .7584);
+    height: 53vh;
+    width: 100%;
+    border: 1px solid white;
+    border: 1px solid rgba(	68, 85, 102, .4);
+    border-radius: 5px;
+    padding: 1.5em;
+    font-family: helvetica;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    transform: rotate(0);
+    flex-direction: column;
+    -webkit-box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
+    -moz-box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
+    box-shadow: -10px 3px 70px -5px rgba(68,85,102,0.71);
+  }
+
+  .welcome-p{
+    width: 100%;
+  }
+}
+
 
 .about-message-austin, .about-message-rikki{
     color: #445566;

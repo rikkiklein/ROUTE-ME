@@ -242,3 +242,50 @@ input{
   color: #446655;
   font-weight: bold;
 }
+
+@media screen and (max-width: 450px){
+  .flex-title h4{
+    line-height: 1.5em;
+  }
+
+  .flex-search{
+    flex-direction: column;
+    justify-content: center;
+    padding: 1em;
+  }
+
+  .left-search{
+    width: 100%;
+    padding: 2em;
+    order: 1;
+  }
+
+  .right-search{
+    width: 100%;
+    order: 2;
+  }
+
+  .but-area{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin-top: 1%;
+    justify-content: center;
+
+  }
+
+  .button-add{
+    width: 100%;
+
+  }
+
+  .shortest-path{
+    position: absolute;
+    padding: 1em;
+    margin-bottom: 10%;
+    margin-top: 110%;
+  }
+
+}
