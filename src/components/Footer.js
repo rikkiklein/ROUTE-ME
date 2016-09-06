@@ -9,7 +9,7 @@ class Footer extends Component {
     return (
       <div>
         <div className="footer">
-          Footer info
+          &copy Route Me by Rikki Rifka Rabinowitz & Austin Hudson.  All rights reserved. 2016
         </div>
       </div>
     );
